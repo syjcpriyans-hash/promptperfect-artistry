@@ -4,12 +4,12 @@ import { Check, Copy } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
-import { getWorkflowDisplayTitle } from "@/lib/workflow-display";
-import { getCategory, getSubcategory, getWorkflow } from "@/data/workflows";
+import { findWorkflowByPublicParam, getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { getCategory, getSubcategory, workflows } from "@/data/workflows";
 
 export const Route = createFileRoute("/workflows/$id")({
   loader: ({ params }) => {
-    const workflow = getWorkflow(params.id);
+    const workflow = findWorkflowByPublicParam(params.id, workflows);
     if (!workflow) throw notFound();
     const category = getCategory(workflow.categorySlug);
     const subcategory = getSubcategory(workflow.categorySlug, workflow.subcategorySlug);
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/workflows/$id")({
     meta: [
       {
         title: loaderData
-          ? `${loaderData.workflow.id} — ${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
+          ? `${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
           : "Workflow — ListingReady",
       },
       { name: "description", content: "Copy-paste-ready AI product image prompt workflow." },
@@ -84,13 +84,11 @@ function WorkflowDetailPage() {
               </Link>
             </>
           )}
-          {" "}/ {workflow.id}
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
           <div>
-            <p className="text-sm font-medium text-muted-foreground">{workflow.id}</p>
-            <h1 className="mt-2 text-4xl font-semibold tracking-tight">{title}</h1>
+            <h1 className="text-4xl font-semibold tracking-tight">{title}</h1>
             <p className="mt-4 text-muted-foreground">
               Copy the complete prompt, upload your product photo, and use the fix prompts only when the AI changes the product.
             </p>
@@ -100,6 +98,7 @@ function WorkflowDetailPage() {
             <WorkflowPreviewImage workflow={workflow} />
             <div className="p-4">
               <p className="text-sm font-semibold">{title}</p>
+              <p className="mt-1 text-xs text-muted-foreground">Click the image to zoom.</p>
             </div>
           </div>
         </div>

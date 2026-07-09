@@ -50,8 +50,10 @@ function CategoryPage() {
                   {subcategory.title}
                 </div>
                 <h2 className="mt-5 text-2xl font-semibold">{subcategory.title}</h2>
-                <p className="mt-2 text-sm text-muted-foreground">{subcategory.description}</p>
-                <p className="mt-5 text-sm font-medium">{items.length} workflows →</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {items.length} visual prompt workflows for this product type.
+                </p>
+                <p className="mt-5 text-sm font-medium">Open workflows →</p>
               </Link>
             );
           })}

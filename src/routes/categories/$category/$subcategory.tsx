@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
-import { getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
 import { getCategory, getSubcategory, getWorkflowsForSubcategory } from "@/data/workflows";
 
 export const Route = createFileRoute("/categories/$category/$subcategory")({
@@ -15,7 +15,12 @@ export const Route = createFileRoute("/categories/$category/$subcategory")({
   head: ({ loaderData }) => ({
     meta: [
       { title: `${loaderData?.subcategory.title ?? "Subcategory"} — ListingReady` },
-      { name: "description", content: loaderData?.subcategory.description ?? "" },
+      {
+        name: "description",
+        content: loaderData
+          ? `${loaderData.subcategory.title} prompt workflows for ${loaderData.category.title}.`
+          : "Prompt workflows by product type.",
+      },
     ],
   }),
   component: SubcategoryPage,
@@ -43,24 +48,28 @@ function SubcategoryPage() {
             / {subcategory.title}
           </p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight">{subcategory.title}</h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">{subcategory.description}</p>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            {items.length} workflows for creating different image types for this product.
+          </p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((workflow) => (
-            <Link
+            <article
               key={workflow.id}
-              to="/workflows/$id"
-              params={{ id: workflow.id }}
               className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
               <WorkflowPreviewImage workflow={workflow} />
               <div className="p-4">
-                <h2 className="line-clamp-2 text-base font-semibold leading-snug group-hover:underline">
+                <Link
+                  to="/workflows/$id"
+                  params={{ id: getWorkflowPublicSlug(workflow) }}
+                  className="line-clamp-2 text-base font-semibold leading-snug group-hover:underline"
+                >
                   {getWorkflowDisplayTitle(workflow)}
-                </h2>
+                </Link>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </section>

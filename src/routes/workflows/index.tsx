@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
-import { getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
 import { categories, subcategories, getWorkflowsForSubcategory } from "@/data/workflows";
 
 export const Route = createFileRoute("/workflows/")({
@@ -59,19 +59,21 @@ function WorkflowsPage() {
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                           {items.map((workflow) => (
-                            <Link
+                            <article
                               key={workflow.id}
-                              to="/workflows/$id"
-                              params={{ id: workflow.id }}
                               className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                             >
                               <WorkflowPreviewImage workflow={workflow} />
                               <div className="p-4">
-                                <h4 className="line-clamp-2 text-base font-semibold leading-snug group-hover:underline">
+                                <Link
+                                  to="/workflows/$id"
+                                  params={{ id: getWorkflowPublicSlug(workflow) }}
+                                  className="line-clamp-2 text-base font-semibold leading-snug group-hover:underline"
+                                >
                                   {getWorkflowDisplayTitle(workflow)}
-                                </h4>
+                                </Link>
                               </div>
-                            </Link>
+                            </article>
                           ))}
                         </div>
                       </div>
