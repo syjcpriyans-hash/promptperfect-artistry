@@ -1,10 +1,17 @@
 import type { Workflow } from "@/data/workflows";
 
-export function getWorkflowDisplayTitle(workflowOrTitle: Workflow | string) {
+function getWorkflowTitleBase(workflowOrTitle: Workflow | string) {
   const title = typeof workflowOrTitle === "string" ? workflowOrTitle : workflowOrTitle.title;
 
   return title
     .replace(/^Amazon\s+/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function getWorkflowDisplayTitle(workflowOrTitle: Workflow | string) {
+  return getWorkflowTitleBase(workflowOrTitle)
+    .replace(/\s+-\s+(T-Shirt|Shirt|Hoodie|Sweatshirt|Hoodie-Sweatshirt|Hoodie\/Sweatshirt)$/i, "")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -14,7 +21,9 @@ export function getWorkflowPreviewPath(workflow: Workflow) {
 }
 
 export function getWorkflowPublicSlug(workflow: Workflow) {
-  return getWorkflowDisplayTitle(workflow)
+  // Keep the original subcategory suffix in the URL slug so workflows with the same
+  // base name across T-Shirt, Hoodie/Sweatshirt, and Shirt remain unique.
+  return getWorkflowTitleBase(workflow)
     .toLowerCase()
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
