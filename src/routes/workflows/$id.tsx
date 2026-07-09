@@ -130,13 +130,20 @@ function WorkflowDetailPage() {
 
         <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
           <h2 className="text-2xl font-semibold">Settings in ChatGPT</h2>
-          <ol className="mt-4 list-decimal space-y-2 pl-5 text-muted-foreground">
-            <li>Open ChatGPT and start a new chat using GPT-4o / ChatGPT Images.</li>
-            <li>Upload your original product photo as the only reference image.</li>
-            <li>Paste the Complete Prompt above exactly as written — do not shorten it.</li>
-            <li>Generate the image, then compare it against the original for any drift.</li>
-            <li>If something changes that should not change, use the matching Fix Prompt below in the same chat.</li>
-          </ol>
+          <dl className="mt-4 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Model</dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">GPT-5.5</dd>
+            </div>
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Intelligence</dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">High</dd>
+            </div>
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Mode</dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">Create an Image</dd>
+            </div>
+          </dl>
         </section>
 
         <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">

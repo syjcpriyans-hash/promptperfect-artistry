@@ -11,7 +11,7 @@ export function WorkflowPreviewImage({ workflow, className }: { workflow: Workfl
     return (
       <div
         className={cn(
-          "flex aspect-[4/3] w-full items-center justify-center rounded-t-2xl border-b bg-gradient-to-br from-muted via-background to-muted p-6 text-center",
+          "flex aspect-[4/3] w-full items-center justify-center rounded-t-2xl border-b bg-muted/30 p-6 text-center",
           className,
         )}
       >
@@ -32,7 +32,7 @@ export function WorkflowPreviewImage({ workflow, className }: { workflow: Workfl
     <img
       src={getWorkflowPreviewPath(workflow)}
       alt={`${title} preview`}
-      className={cn("aspect-[4/3] w-full rounded-t-2xl object-cover", className)}
+      className={cn("aspect-[4/3] w-full rounded-t-2xl bg-muted/20 object-contain p-2", className)}
       loading="lazy"
       onError={() => setFailed(true)}
     />
