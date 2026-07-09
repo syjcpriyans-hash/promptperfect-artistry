@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
-import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
 import { getWorkflow } from "@/data/workflows";
 
@@ -33,12 +32,12 @@ const categories = [
 ];
 
 const comparison = [
-  ["Garment color or pattern drifts between attempts", "Reference-locked prompt keeps color, pattern and shape consistent"],
-  ["Colors shift under different lighting or background prompts", "Exact lighting and color-hold instructions built into the prompt"],
-  ["Print or texture comes out blurry", "Resolution and detail instructions included by default"],
-  ["Background looks obviously artificial", "Clean product-photo presentation prompts, tested per image type"],
-  ["You don't know what to type into the AI", "Complete, copy-paste prompt — no prompt-writing required"],
-  ["Every failed attempt costs time and generation credits", "Paired fix prompts help recover the image without starting from zero"],
+  ["Garment or pattern drifts between generations", "Reference-locked prompt keeps the product identical"],
+  ["Color shifts under generated lighting", "Exact lighting and color-hold instructions"],
+  ["Print and fabric texture come back blurry", "Resolution and detail instructions included"],
+  ["Background looks artificial or off-brand", "Marketplace-tested background prompts"],
+  ["You don't know what to prompt in the first place", "Complete copy-paste prompt, no guesswork"],
+  ["Failed attempts burn through credits", "Pre-tested workflow — first pass is usable"],
 ];
 
 const steps = [
@@ -110,19 +109,13 @@ function HomePage() {
         </div>
 
         <div id="featured-workflow" className="rounded-3xl border bg-card p-5 shadow-sm">
-          <p className="text-lg font-semibold text-muted-foreground">Featured Workflow</p>
-          <h2 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
-            {featuredWorkflow ? getWorkflowDisplayTitle(featuredWorkflow) : "Product image workflow"}
+          <p className="text-sm font-medium text-muted-foreground">Featured workflow</p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight">
+            {featuredWorkflow ? getWorkflowDisplayTitle(featuredWorkflow) : "Main image — apparel on white background"}
           </h2>
           <p className="mt-4 text-muted-foreground">
             A complete prompt workflow built for turning one product reference image into a clean product visual.
           </p>
-
-          {featuredWorkflow && (
-            <div className="mt-6 overflow-hidden rounded-2xl border bg-background shadow-sm">
-              <WorkflowPreviewImage workflow={featuredWorkflow} />
-            </div>
-          )}
 
           <pre className="mt-6 overflow-x-auto rounded-2xl bg-muted p-4 text-sm leading-6 text-foreground">
             {`Using the uploaded product image as the only product reference, create a clean professional product image. Preserve the product exactly and change only the requested image style.`}
@@ -144,22 +137,34 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border-y bg-muted/30">
-        <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight">What normally goes wrong, and what a tested workflow fixes.</h2>
-            <p className="mt-3 text-muted-foreground">
-              The same problems come up in almost every product-photo generation. Each workflow is written specifically to prevent them.
-            </p>
+      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <h2 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+            What goes wrong, and what the workflow fixes.
+          </h2>
+        </div>
+
+        <div className="mt-10 overflow-hidden rounded-xl border bg-card shadow-sm">
+          <div className="grid border-b bg-muted/30 md:grid-cols-2">
+            <div className="border-b px-6 py-4 text-xs font-medium uppercase tracking-[0.35em] text-muted-foreground md:border-b-0 md:border-r">
+              What goes wrong
+            </div>
+            <div className="px-6 py-4 text-xs font-medium uppercase tracking-[0.35em] text-muted-foreground">
+              What the workflow fixes
+            </div>
           </div>
-          <div className="grid gap-3">
-            {comparison.map(([problem, fix]) => (
-              <div key={problem} className="rounded-2xl border bg-background p-4">
-                <p className="font-medium">{problem}</p>
-                <p className="mt-2 text-sm text-muted-foreground">✓ {fix}</p>
+
+          {comparison.map(([problem, fix]) => (
+            <div key={problem} className="grid border-b last:border-b-0 md:grid-cols-2">
+              <div className="border-b px-6 py-5 text-sm text-muted-foreground md:border-b-0 md:border-r">
+                {problem}
               </div>
-            ))}
-          </div>
+              <div className="px-6 py-5 text-sm font-medium text-foreground">
+                <span className="mr-3 text-primary">✓</span>
+                {fix}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -10,8 +10,8 @@ const nav = [
 
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`text-3xl font-semibold tracking-tight text-foreground sm:text-4xl ${className}`}>
-      ListingReady
+    <span className={`inline-flex items-baseline text-3xl font-semibold tracking-tight text-foreground sm:text-4xl ${className}`}>
+      ListingReady<span className="text-primary">.</span>
     </span>
   );
 }
