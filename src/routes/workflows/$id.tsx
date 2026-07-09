@@ -98,7 +98,7 @@ function WorkflowDetailPage() {
             <WorkflowPreviewImage workflow={workflow} />
             <div className="p-4">
               <p className="text-sm font-semibold">{title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">Click the image to zoom.</p>
+              <p className="mt-1 text-xs text-muted-foreground">Click the image to enlarge.</p>
             </div>
           </div>
         </div>
