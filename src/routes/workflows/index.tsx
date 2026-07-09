@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
-import { Badge } from "@/components/ui/badge";
-import { subcategories, categories, getWorkflowsForSubcategory } from "@/data/workflows";
+import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
+import { getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { categories, subcategories, getWorkflowsForSubcategory } from "@/data/workflows";
 
 export const Route = createFileRoute("/workflows/")({
   head: () => ({
     meta: [
       { title: "Workflows — ListingReady" },
-      { name: "description", content: "Tested prompt workflows for product photography, organized by product type and marketplace." },
+      { name: "description", content: "Tested prompt workflows for product photography, organized by product type." },
       { property: "og:title", content: "Workflows — ListingReady" },
       { property: "og:description", content: "Tested prompt workflows for product photography." },
       { property: "og:url", content: "/workflows" },
@@ -17,71 +18,66 @@ export const Route = createFileRoute("/workflows/")({
   component: WorkflowsPage,
 });
 
-const difficultyVariant: Record<string, "default" | "secondary" | "outline"> = {
-  Easy: "secondary",
-  Medium: "outline",
-  Hard: "default",
-};
-
 function WorkflowsPage() {
   return (
     <SiteShell>
-      <section className="section-y">
-        <div className="container-x">
-          <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Library</p>
-          <h1 className="mt-4 font-display text-4xl font-semibold text-ink md:text-5xl">Workflows</h1>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            Every workflow is a complete, copy-paste prompt tested for a specific product type and
-            marketplace. Browse by category, or jump straight into a workflow below.
+      <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <p className="text-sm font-medium text-muted-foreground">Library</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight">Workflows</h1>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Browse visual prompt workflows by product type. Each card shows the kind of image the workflow helps create.
           </p>
+        </div>
 
-          {categories.map((cat) => (
-            <div key={cat.slug} className="mt-14 first:mt-10">
-              <h2 className="font-display text-xl font-semibold text-ink">{cat.title}</h2>
-              {subcategories
-                .filter((s) => s.categorySlug === cat.slug)
-                .map((sub) => {
-                  const items = getWorkflowsForSubcategory(cat.slug, sub.slug);
-                  return (
-                    <div key={sub.slug} className="mt-6">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                          {sub.title}
-                        </h3>
-                        <Link
-                          to="/categories/$category/$subcategory"
-                          params={{ category: cat.slug, subcategory: sub.slug }}
-                          className="text-xs text-accent hover:underline"
-                        >
-                          View all →
-                        </Link>
-                      </div>
-                      <div className="mt-3 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-                        {items.map((w) => (
+        <div className="space-y-12">
+          {categories.map((category) => (
+            <div key={category.slug}>
+              <h2 className="text-2xl font-semibold">{category.title}</h2>
+
+              <div className="mt-6 space-y-10">
+                {subcategories
+                  .filter((subcategory) => subcategory.categorySlug === category.slug)
+                  .map((subcategory) => {
+                    const items = getWorkflowsForSubcategory(category.slug, subcategory.slug);
+
+                    return (
+                      <div key={subcategory.slug}>
+                        <div className="mb-4 flex items-end justify-between gap-4">
+                          <div>
+                            <h3 className="text-xl font-semibold">{subcategory.title}</h3>
+                            <p className="mt-1 text-sm text-muted-foreground">{items.length} workflows</p>
+                          </div>
                           <Link
-                            key={w.id}
-                            to="/workflows/$id"
-                            params={{ id: w.id }}
-                            className="group flex flex-col justify-between bg-paper p-6 transition-colors hover:bg-accent/5"
+                            to="/categories/$category/$subcategory"
+                            params={{ category: category.slug, subcategory: subcategory.slug }}
+                            className="text-sm font-medium hover:underline"
                           >
-                            <div>
-                              <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-accent">
-                                {w.id} · {w.bestAI}
-                              </p>
-                              <h4 className="mt-3 font-display text-base font-medium text-ink group-hover:underline">
-                                {w.title}
-                              </h4>
-                            </div>
-                            <div className="mt-6 flex items-center gap-2">
-                              <Badge variant={difficultyVariant[w.difficulty]}>{w.difficulty}</Badge>
-                              <span className="text-xs text-muted-foreground">{w.timeRequired}</span>
-                            </div>
+                            View all →
                           </Link>
-                        ))}
+                        </div>
+
+                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                          {items.map((workflow) => (
+                            <Link
+                              key={workflow.id}
+                              to="/workflows/$id"
+                              params={{ id: workflow.id }}
+                              className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                            >
+                              <WorkflowPreviewImage workflow={workflow} />
+                              <div className="p-4">
+                                <h4 className="line-clamp-2 text-base font-semibold leading-snug group-hover:underline">
+                                  {getWorkflowDisplayTitle(workflow)}
+                                </h4>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+              </div>
             </div>
           ))}
         </div>

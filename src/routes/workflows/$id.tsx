@@ -2,15 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import {
-  getCategory,
-  getSubcategory,
-  getWorkflow,
-  type Workflow,
-} from "@/data/workflows";
+import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
+import { getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { getCategory, getSubcategory, getWorkflow } from "@/data/workflows";
 
 export const Route = createFileRoute("/workflows/$id")({
   loader: ({ params }) => {
@@ -22,8 +17,12 @@ export const Route = createFileRoute("/workflows/$id")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.workflow.id} — ${loaderData.workflow.title} — ListingReady` : "Workflow — ListingReady" },
-      { name: "description", content: loaderData?.workflow.notes ?? "Copy-paste-ready AI prompt workflow." },
+      {
+        title: loaderData
+          ? `${loaderData.workflow.id} — ${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
+          : "Workflow — ListingReady",
+      },
+      { name: "description", content: "Copy-paste-ready AI product image prompt workflow." },
     ],
   }),
   component: WorkflowDetailPage,
@@ -38,200 +37,148 @@ function CopyButton({ text, label = "Copy prompt" }: { text: string; label?: str
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Clipboard API unavailable — fail silently, button just won't confirm.
+      // Clipboard API unavailable — button simply will not show confirmation.
     }
   };
 
   return (
-    <Button onClick={handleCopy} variant={copied ? "secondary" : "default"} size="sm" className="gap-1.5">
-      {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+    <Button type="button" variant="outline" size="sm" onClick={handleCopy}>
+      {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
       {copied ? "Copied!" : label}
     </Button>
   );
 }
 
-const difficultyVariant: Record<string, "default" | "secondary" | "outline"> = {
-  Easy: "secondary",
-  Medium: "outline",
-  Hard: "default",
-};
-
 function WorkflowDetailPage() {
   const { workflow, category, subcategory } = Route.useLoaderData();
+  const title = getWorkflowDisplayTitle(workflow);
 
   return (
     <SiteShell>
-      <section className="section-y">
-        <div className="container-x max-w-3xl">
-          <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            <Link to="/categories" className="hover:underline">
-              Categories
-            </Link>{" "}
-            {category && (
-              <>
-                /{" "}
-                <Link to="/categories/$category" params={{ category: category.slug }} className="hover:underline">
-                  {category.title}
-                </Link>{" "}
-              </>
-            )}
-            {subcategory && (
-              <>
-                /{" "}
-                <Link
-                  to="/categories/$category/$subcategory"
-                  params={{ category: workflow.categorySlug, subcategory: workflow.subcategorySlug }}
-                  className="hover:underline"
-                >
-                  {subcategory.title}
-                </Link>{" "}
-              </>
-            )}
-            / {workflow.id}
-          </p>
-
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-[0.14em] text-accent">{workflow.id}</span>
-            <Badge variant={difficultyVariant[workflow.difficulty]}>{workflow.difficulty}</Badge>
-            <span className="text-xs text-muted-foreground">{workflow.timeRequired}</span>
-          </div>
-
-          <h1 className="mt-3 font-display text-3xl font-semibold text-ink md:text-4xl">
-            {workflow.title}
-          </h1>
-
-          {/* Complete Prompt */}
-          <div className="mt-8 border border-border bg-paper p-5">
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">
-                Complete Prompt
-              </h2>
-              <CopyButton text={workflow.prompt} />
-            </div>
-            <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-ink/90">
-              {workflow.prompt}
-            </p>
-          </div>
-
-          {/* Best AI / original image / settings */}
-          <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2">
-            <div className="bg-paper p-5">
-              <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Best AI to Use
-              </h3>
-              <p className="mt-1 font-display text-base text-ink">{workflow.bestAI}</p>
-            </div>
-            <div className="bg-paper p-5">
-              <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Original Image Required
-              </h3>
-              <p className="mt-1 font-display text-base text-ink">
-                Your own uploaded product photo — this is the only reference used.
-              </p>
-            </div>
-          </div>
-
-          {/* Settings to use in ChatGPT */}
-          <div className="mt-6 border border-border bg-paper p-5">
-            <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">
-              Settings in ChatGPT
-            </h2>
-            <ul className="mt-3 space-y-1.5 text-sm text-ink/90">
-              <li>1. Open ChatGPT and start a new chat using GPT-4o / ChatGPT Images.</li>
-              <li>2. Upload your original product photo as the only reference image.</li>
-              <li>3. Paste the Complete Prompt above exactly as written — do not shorten it.</li>
-              <li>4. Generate the image, then compare it against the original for any drift.</li>
-              <li>5. If something changes that shouldn't, use the matching Fix Prompt below in the same chat.</li>
-            </ul>
-          </div>
-
-          {/* Common Mistakes */}
-          <div className="mt-6 border border-border bg-paper p-5">
-            <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">
-              Common Mistakes
-            </h2>
-            <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
-              {workflow.commonMistakes.map((m) => (
-                <li key={m} className="text-sm text-ink/80">
-                  · {m}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Fix Prompts */}
-          <div className="mt-6 border border-border bg-paper p-5">
-            <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">
-              Fix Prompts
-            </h2>
-            <div className="mt-3 divide-y divide-border">
-              {workflow.fixPrompts.map((fp) => (
-                <div key={fp.issue} className="flex flex-col gap-2 py-3 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="pr-4">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      {fp.issue}
-                    </p>
-                    <p className="mt-1 text-sm text-ink/90">{fp.fix}</p>
-                  </div>
-                  <div className="shrink-0">
-                    <CopyButton text={fp.fix} label="Copy fix" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Example / expected output */}
-          <div className="mt-6 border border-border bg-paper p-5">
-            <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">
-              Expected Output
-            </h2>
-            <p className="mt-3 text-sm text-ink/90">{workflow.exampleNote}</p>
-          </div>
-
-          {/* Amazon Compliance */}
-          <div className="mt-6 border border-border bg-paper p-5">
-            <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">
-              Amazon Compliance
-            </h2>
-            <div className="mt-3 divide-y divide-border">
-              {workflow.compliance.map((row) => (
-                <div key={row.label} className="flex items-center justify-between py-2 text-sm">
-                  <span className="text-ink/80">{row.label}</span>
-                  <span
-                    className={cn(
-                      "font-medium",
-                      row.value === "Yes" ? "text-ink" : "text-muted-foreground",
-                    )}
-                  >
-                    {row.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Notes */}
-          <div className="mt-6 border border-border bg-paper p-5">
-            <h2 className="font-display text-sm font-medium uppercase tracking-wider text-ink">Notes</h2>
-            <p className="mt-3 text-sm text-ink/90">{workflow.notes}</p>
-          </div>
-
+      <article className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mb-8 text-sm text-muted-foreground">
+          <Link to="/categories" className="hover:text-foreground">
+            Categories
+          </Link>
+          {category && (
+            <>
+              {" "}/ {" "}
+              <Link
+                to="/categories/$category"
+                params={{ category: category.slug }}
+                className="hover:text-foreground"
+              >
+                {category.title}
+              </Link>
+            </>
+          )}
           {subcategory && category && (
-            <div className="mt-10">
+            <>
+              {" "}/ {" "}
               <Link
                 to="/categories/$category/$subcategory"
                 params={{ category: category.slug, subcategory: subcategory.slug }}
-                className="text-sm text-ink underline-offset-4 hover:underline"
+                className="hover:text-foreground"
               >
-                ← Back to {subcategory.title} workflows
+                {subcategory.title}
               </Link>
-            </div>
+            </>
           )}
+          {" "}/ {workflow.id}
         </div>
-      </section>
+
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">{workflow.id}</p>
+            <h1 className="mt-2 text-4xl font-semibold tracking-tight">{title}</h1>
+            <p className="mt-4 text-muted-foreground">
+              Copy the complete prompt, upload your product photo, and use the fix prompts only when the AI changes the product.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+            <WorkflowPreviewImage workflow={workflow} />
+            <div className="p-4">
+              <p className="text-sm font-semibold">{title}</p>
+            </div>
+          </div>
+        </div>
+
+        <section className="mt-10 rounded-2xl border bg-card p-5 shadow-sm">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-2xl font-semibold">Complete Prompt</h2>
+            <CopyButton text={workflow.prompt} />
+          </div>
+          <pre className="whitespace-pre-wrap rounded-xl bg-muted p-4 text-sm leading-6 text-foreground">
+            {workflow.prompt}
+          </pre>
+        </section>
+
+        <section className="mt-8 grid gap-5 md:grid-cols-2">
+          <div className="rounded-2xl border bg-card p-5 shadow-sm">
+            <h2 className="text-xl font-semibold">Best AI to Use</h2>
+            <p className="mt-3 text-muted-foreground">{workflow.bestAI}</p>
+          </div>
+
+          <div className="rounded-2xl border bg-card p-5 shadow-sm">
+            <h2 className="text-xl font-semibold">Original Image Required</h2>
+            <p className="mt-3 text-muted-foreground">
+              Your own uploaded product photo — this is the only reference used.
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold">Settings in ChatGPT</h2>
+          <ol className="mt-4 list-decimal space-y-2 pl-5 text-muted-foreground">
+            <li>Open ChatGPT and start a new chat using GPT-4o / ChatGPT Images.</li>
+            <li>Upload your original product photo as the only reference image.</li>
+            <li>Paste the Complete Prompt above exactly as written — do not shorten it.</li>
+            <li>Generate the image, then compare it against the original for any drift.</li>
+            <li>If something changes that should not change, use the matching Fix Prompt below in the same chat.</li>
+          </ol>
+        </section>
+
+        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold">Common Mistakes</h2>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {workflow.commonMistakes.map((mistake) => (
+              <li key={mistake} className="rounded-xl bg-muted px-3 py-2 text-sm text-muted-foreground">
+                {mistake}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold">Fix Prompts</h2>
+          <div className="mt-4 space-y-4">
+            {workflow.fixPrompts.map((fixPrompt) => (
+              <div key={fixPrompt.issue} className="rounded-xl border p-4">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                  <h3 className="font-semibold">{fixPrompt.issue}</h3>
+                  <CopyButton text={fixPrompt.fix} label="Copy fix" />
+                </div>
+                <p className="whitespace-pre-wrap text-sm leading-6 text-muted-foreground">
+                  {fixPrompt.fix}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {subcategory && category && (
+          <div className="mt-10">
+            <Link
+              to="/categories/$category/$subcategory"
+              params={{ category: category.slug, subcategory: subcategory.slug }}
+              className="text-sm font-medium hover:underline"
+            >
+              ← Back to {subcategory.title} workflows
+            </Link>
+          </div>
+        )}
+      </article>
     </SiteShell>
   );
 }
-
-export type { Workflow };
