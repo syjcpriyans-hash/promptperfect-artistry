@@ -95,10 +95,10 @@ function WorkflowDetailPage() {
           </div>
 
           <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
-            <WorkflowPreviewImage workflow={workflow} />
+            <WorkflowPreviewImage workflow={workflow} enableZoom />
             <div className="p-4">
               <p className="text-sm font-semibold">{title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">Click the image to enlarge.</p>
+              <p className="mt-1 text-xs text-muted-foreground">Click the image to zoom.</p>
             </div>
           </div>
         </div>
