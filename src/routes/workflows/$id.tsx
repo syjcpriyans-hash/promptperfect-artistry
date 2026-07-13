@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
-import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
+import { WorkflowImageComparison } from "@/components/workflow-image-comparison";
 import { findWorkflowByPublicParam, getWorkflowDisplayTitle } from "@/lib/workflow-display";
 import { getCategory, getSubcategory, workflows } from "@/data/all-workflows";
 
@@ -86,24 +86,16 @@ function WorkflowDetailPage() {
           )}
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
-          <div>
-            <h1 className="text-4xl font-semibold tracking-tight">{title}</h1>
-            <p className="mt-4 text-muted-foreground">
-              Copy the complete prompt, upload your product photo, and use the fix prompts only when the AI changes the product.
-            </p>
-          </div>
-
-          <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
-            <WorkflowPreviewImage workflow={workflow} enableZoom />
-            <div className="p-4">
-              <p className="text-sm font-semibold">{title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">Click the image to zoom.</p>
-            </div>
-          </div>
+        <div>
+          <h1 className="text-4xl font-semibold tracking-tight">{title}</h1>
+          <p className="mt-4 max-w-3xl text-muted-foreground">
+            Copy the complete prompt, upload your product photo, and use the fix prompts only when the AI changes the product.
+          </p>
         </div>
 
-        <section className="mt-10 rounded-2xl border bg-card p-5 shadow-sm">
+        <WorkflowImageComparison workflow={workflow} />
+
+        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-2xl font-semibold">Complete Prompt</h2>
             <CopyButton text={workflow.prompt} />
