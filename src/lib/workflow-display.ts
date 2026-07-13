@@ -1,7 +1,10 @@
 import type { Workflow } from "@/data/workflows";
 
 function getWorkflowTitleBase(workflowOrTitle: Workflow | string) {
-  const title = typeof workflowOrTitle === "string" ? workflowOrTitle : workflowOrTitle.title;
+  const title =
+    typeof workflowOrTitle === "string"
+      ? workflowOrTitle
+      : workflowOrTitle.title;
 
   return title
     .replace(/^Amazon\s+/i, "")
@@ -11,7 +14,10 @@ function getWorkflowTitleBase(workflowOrTitle: Workflow | string) {
 
 export function getWorkflowDisplayTitle(workflowOrTitle: Workflow | string) {
   return getWorkflowTitleBase(workflowOrTitle)
-    .replace(/\s+-\s+(T-Shirt|Shirt|Hoodie|Sweatshirt|Hoodie-Sweatshirt|Hoodie\/Sweatshirt|Dress)$/i, "")
+    .replace(
+      /\s+-\s+(T-Shirt|Shirt|Hoodie|Sweatshirt|Hoodie-Sweatshirt|Hoodie\/Sweatshirt|Dress|Kurti\s*\/\s*Ethnic Wear|Jeans\s*\/\s*Pants)$/i,
+      "",
+    )
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -21,8 +27,8 @@ export function getWorkflowPreviewPath(workflow: Workflow) {
 }
 
 export function getWorkflowPublicSlug(workflow: Workflow) {
-  // Keep the original subcategory suffix in the URL slug so workflows with the same
-  // base name across apparel types remain unique.
+  // Keep the product suffix in the URL slug so similarly named workflows
+  // remain unique across product categories.
   return getWorkflowTitleBase(workflow)
     .toLowerCase()
     .replace(/&/g, "and")
@@ -30,7 +36,10 @@ export function getWorkflowPublicSlug(workflow: Workflow) {
     .replace(/^-+|-+$/g, "");
 }
 
-export function findWorkflowByPublicParam(param: string, workflows: Workflow[]) {
+export function findWorkflowByPublicParam(
+  param: string,
+  workflows: Workflow[],
+) {
   const normalizedParam = param.toLowerCase();
 
   return workflows.find(
