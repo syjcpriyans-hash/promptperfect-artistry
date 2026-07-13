@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
-import { categories, subcategories, getWorkflowsForSubcategory } from "@/data/workflows";
+import { categories, subcategories, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/workflows/")({
   head: () => ({

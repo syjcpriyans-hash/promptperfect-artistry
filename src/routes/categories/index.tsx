@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
-import { categories, getSubcategoriesForCategory } from "@/data/workflows";
+import { categories, getSubcategoriesForCategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/categories/")({
   head: () => ({

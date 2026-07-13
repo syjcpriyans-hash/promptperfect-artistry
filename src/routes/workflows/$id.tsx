@@ -5,7 +5,7 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { findWorkflowByPublicParam, getWorkflowDisplayTitle } from "@/lib/workflow-display";
-import { getCategory, getSubcategory, workflows } from "@/data/workflows";
+import { getCategory, getSubcategory, workflows } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/workflows/$id")({
   loader: ({ params }) => {

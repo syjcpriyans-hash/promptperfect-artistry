@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
-import { getCategory, getSubcategoriesForCategory, getWorkflowsForSubcategory } from "@/data/workflows";
+import { getCategory, getSubcategoriesForCategory, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/categories/$category/")({
   loader: ({ params }) => {

@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
-import { getCategory, getSubcategory, getWorkflowsForSubcategory } from "@/data/workflows";
+import { getCategory, getSubcategory, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/categories/$category/$subcategory")({
   loader: ({ params }) => {
