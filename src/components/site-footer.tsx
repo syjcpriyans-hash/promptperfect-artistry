@@ -21,9 +21,8 @@ export function SiteFooter() {
           <div>
             <p className="font-display text-sm font-medium text-ink">Product</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/workflows" className="hover:text-ink">Workflows</Link></li>
               <li><Link to="/categories" className="hover:text-ink">Categories</Link></li>
-              <li><Link to="/pricing" className="hover:text-ink">Pricing</Link></li>
+              <li><Link to="/workflows" className="hover:text-ink">Workflows</Link></li>
               <li><Link to="/faq" className="hover:text-ink">FAQ</Link></li>
             </ul>
           </div>
