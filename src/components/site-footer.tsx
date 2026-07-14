@@ -23,6 +23,7 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link to="/categories" className="hover:text-ink">Categories</Link></li>
               <li><Link to="/workflows" className="hover:text-ink">Workflows</Link></li>
+              <li><Link to="/case-studies" className="hover:text-ink">Case Studies</Link></li>
               <li><Link to="/about" className="hover:text-ink">About</Link></li>
               <li><Link to="/methodology" className="hover:text-ink">How We Test</Link></li>
               <li><Link to="/faq" className="hover:text-ink">FAQ</Link></li>
