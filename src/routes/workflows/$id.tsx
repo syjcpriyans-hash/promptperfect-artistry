@@ -5,12 +5,13 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { WorkflowImageComparison } from "@/components/workflow-image-comparison";
 import { findWorkflowByPublicParam, getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { isSizeGuideWorkflow } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategory, workflows } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/workflows/$id")({
   loader: ({ params }) => {
     const workflow = findWorkflowByPublicParam(params.id, workflows);
-    if (!workflow) throw notFound();
+    if (!workflow || isSizeGuideWorkflow(workflow)) throw notFound();
     const category = getCategory(workflow.categorySlug);
     const subcategory = getSubcategory(workflow.categorySlug, workflow.subcategorySlug);
     return { workflow, category, subcategory };

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
+import { getVisibleWorkflows } from "@/lib/workflow-visibility";
 import { categories, subcategories, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/workflows/")({
@@ -39,7 +40,9 @@ function WorkflowsPage() {
                 {subcategories
                   .filter((subcategory) => subcategory.categorySlug === category.slug)
                   .map((subcategory) => {
-                    const items = getWorkflowsForSubcategory(category.slug, subcategory.slug);
+                    const items = getVisibleWorkflows(
+                      getWorkflowsForSubcategory(category.slug, subcategory.slug),
+                    );
 
                     return (
                       <div key={subcategory.slug}>

@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
+import { getVisibleWorkflows } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategory, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/categories/$category/$subcategory")({
@@ -9,7 +10,9 @@ export const Route = createFileRoute("/categories/$category/$subcategory")({
     const category = getCategory(params.category);
     const subcategory = getSubcategory(params.category, params.subcategory);
     if (!category || !subcategory) throw notFound();
-    const items = getWorkflowsForSubcategory(category.slug, subcategory.slug);
+    const items = getVisibleWorkflows(
+      getWorkflowsForSubcategory(category.slug, subcategory.slug),
+    );
     return { category, subcategory, items };
   },
   head: ({ loaderData }) => ({

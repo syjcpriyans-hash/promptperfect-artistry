@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
+import { getVisibleWorkflows } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategoriesForCategory, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
 export const Route = createFileRoute("/categories/$category/")({
@@ -37,7 +38,9 @@ function CategoryPage() {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {subcategories.map((subcategory) => {
-            const items = getWorkflowsForSubcategory(category.slug, subcategory.slug);
+            const items = getVisibleWorkflows(
+              getWorkflowsForSubcategory(category.slug, subcategory.slug),
+            );
 
             return (
               <Link
