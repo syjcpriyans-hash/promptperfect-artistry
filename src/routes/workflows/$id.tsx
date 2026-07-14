@@ -8,6 +8,10 @@ import { WorkflowImageComparison } from "@/components/workflow-image-comparison"
 import { getWorkflowAbout } from "@/lib/workflow-about";
 import { createBreadcrumbJsonLd } from "@/lib/breadcrumb-structured-data";
 import {
+  getWorkflowSeoDescription,
+  getWorkflowSeoTitle,
+} from "@/lib/workflow-seo";
+import {
   findWorkflowByPublicParam,
   getWorkflowDisplayTitle,
   getWorkflowPublicSlug,
@@ -69,12 +73,14 @@ export const Route = createFileRoute("/workflows/$id")({
       meta: [
         {
           title: loaderData
-            ? `${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
-            : "Workflow — ListingReady",
+            ? getWorkflowSeoTitle(loaderData.workflow)
+            : "AI Product Image Prompt Workflow — ListingReady",
         },
         {
           name: "description",
-          content: "Copy-paste-ready AI product image prompt workflow.",
+          content: loaderData
+            ? getWorkflowSeoDescription(loaderData.workflow)
+            : "Tested AI prompt workflows for creating professional e-commerce product images.",
         },
       ],
       scripts: loaderData
