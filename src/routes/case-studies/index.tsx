@@ -1,20 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
-
-const caseStudies = [
-  {
-    title:
-      "Creating an Amazon-Ready T-Shirt Main Image Without Changing the Product",
-    description:
-      "A workflow test showing how ListingReady converts an ordinary T-shirt photo into a clean main listing image while prioritising colour, print, collar, stitching and proportion accuracy.",
-    path: "/case-studies/tshirt-amazon-main-image",
-    image: "/workflow-previews/wf-001.jpg",
-    imageAlt:
-      "ListingReady result showing a T-shirt prepared as a clean Amazon-style main listing image",
-    published: "July 2026",
-    category: "T-Shirt · Main listing image",
-  },
-];
+import { caseStudySummaries } from "@/data/case-studies";
 
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
@@ -32,7 +18,7 @@ export const Route = createFileRoute("/case-studies/")({
       {
         property: "og:description",
         content:
-          "Real workflow tests covering product preservation, AI-image failures and practical correction methods.",
+          "Detailed workflow tests covering product preservation, AI-image failures, evaluation checkpoints and practical correction methods.",
       },
       { property: "og:url", content: "/case-studies" },
     ],
@@ -54,8 +40,8 @@ function CaseStudiesPage() {
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
               Detailed tests showing the original product-image problem, the
-              ListingReady approach, the generated result, remaining
-              limitations and the workflow used.
+              ListingReady approach, the generated result, evaluation
+              checkpoints, remaining limitations and the workflow used.
             </p>
           </div>
         </section>
@@ -63,7 +49,7 @@ function CaseStudiesPage() {
         <section className="section-y">
           <div className="container-x max-w-5xl">
             <div className="grid gap-6">
-              {caseStudies.map((caseStudy) => (
+              {caseStudySummaries.map((caseStudy) => (
                 <article
                   key={caseStudy.path}
                   className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
@@ -89,6 +75,7 @@ function CaseStudiesPage() {
                         <span>{caseStudy.category}</span>
                         <span>{caseStudy.published}</span>
                       </div>
+
                       <h2 className="mt-4 font-display text-2xl font-semibold leading-snug text-ink md:text-3xl">
                         <Link
                           to={caseStudy.path}
@@ -97,9 +84,11 @@ function CaseStudiesPage() {
                           {caseStudy.title}
                         </Link>
                       </h2>
+
                       <p className="mt-4 leading-7 text-muted-foreground">
                         {caseStudy.description}
                       </p>
+
                       <Link
                         to={caseStudy.path}
                         className="mt-6 inline-flex text-sm font-semibold text-ink underline decoration-accent underline-offset-4"
