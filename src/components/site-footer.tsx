@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Wordmark } from "./site-header";
+import { trackEvent } from "@/lib/analytics";
 
 export function SiteFooter() {
   return (
@@ -15,6 +16,12 @@ export function SiteFooter() {
               Contact:{" "}
               <a
                 href="mailto:hello@listingready.app"
+                onClick={() =>
+                  trackEvent("contact_click", {
+                    contact_method: "email",
+                    link_location: "footer",
+                  })
+                }
                 className="break-all text-ink underline-offset-4 hover:underline"
               >
                 hello@listingready.app

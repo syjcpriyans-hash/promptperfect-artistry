@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
 import heroBefore from "@/assets/hero-before.jpg";
 import heroAfter from "@/assets/hero-after.jpg";
+import { trackEvent } from "@/lib/analytics";
 
 const categories = [
   { title: "Apparel", sub: "T-shirts, hoodies, accessories" },
@@ -82,8 +83,30 @@ function HomePage() {
               guesswork.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link to="/workflows" className="btn-primary">Browse workflows</Link>
-              <a href="#example" className="btn-ghost">See a real example</a>
+              <Link
+                to="/workflows"
+                className="btn-primary"
+                onClick={() =>
+                  trackEvent("cta_click", {
+                    cta_name: "browse_workflows",
+                    cta_location: "home_hero",
+                  })
+                }
+              >
+                Browse workflows
+              </Link>
+              <a
+                href="#example"
+                className="btn-ghost"
+                onClick={() =>
+                  trackEvent("cta_click", {
+                    cta_name: "see_real_example",
+                    cta_location: "home_hero",
+                  })
+                }
+              >
+                See a real example
+              </a>
             </div>
           </div>
 
@@ -133,6 +156,13 @@ function HomePage() {
                 key={item.slug}
                 to="/workflows/$id"
                 params={{ id: item.slug }}
+                onClick={() =>
+                  trackEvent("workflow_select", {
+                    workflow_slug: item.slug,
+                    workflow_title: item.title,
+                    source_location: "home_new_workflows",
+                  })
+                }
                 className="group overflow-hidden border border-border bg-paper transition hover:-translate-y-0.5 hover:shadow-sm"
               >
                 <div className="aspect-[4/5] overflow-hidden bg-paper-alt p-2 sm:p-3">
@@ -263,7 +293,18 @@ function HomePage() {
               Copy the prompt. Paste it. Move on.
             </p>
           </div>
-          <Link to="/workflows" className="btn-primary">Browse workflows</Link>
+          <Link
+            to="/workflows"
+            className="btn-primary"
+            onClick={() =>
+              trackEvent("cta_click", {
+                cta_name: "browse_workflows",
+                cta_location: "home_final",
+              })
+            }
+          >
+            Browse workflows
+          </Link>
         </div>
       </section>
     </SiteShell>

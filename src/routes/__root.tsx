@@ -10,6 +10,8 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import appCss from "../styles.css?url";
+import { AnalyticsConsentBanner } from "@/components/analytics-consent-banner";
+import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
 
 const SITE_URL = "https://listingsready.com";
 
@@ -179,7 +181,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AnalyticsRouteTracker />
       <Outlet />
+      <AnalyticsConsentBanner />
     </QueryClientProvider>
   );
 }

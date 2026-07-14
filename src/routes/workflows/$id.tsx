@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
@@ -18,6 +18,7 @@ import {
 } from "@/lib/workflow-display";
 import { isSizeGuideWorkflow } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategory, workflows } from "@/data/all-workflows";
+import { trackEvent, type AnalyticsParams } from "@/lib/analytics";
 
 export const Route = createFileRoute("/workflows/$id")({
   loader: ({ params }) => {
@@ -101,15 +102,20 @@ export const Route = createFileRoute("/workflows/$id")({
 function CopyButton({
   text,
   label = "Copy prompt",
+  eventName,
+  eventParams,
 }: {
   text: string;
   label?: string;
+  eventName: string;
+  eventParams?: AnalyticsParams;
 }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
+      trackEvent(eventName, eventParams);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -134,6 +140,21 @@ function WorkflowDetailPage() {
     Route.useLoaderData();
   const title = getWorkflowDisplayTitle(workflow);
   const about = getWorkflowAbout(workflow);
+  const workflowSlug = getWorkflowPublicSlug(workflow);
+
+  useEffect(() => {
+    trackEvent("workflow_view", {
+      workflow_slug: workflowSlug,
+      workflow_title: title,
+      category: workflow.categorySlug,
+      subcategory: workflow.subcategorySlug,
+    });
+  }, [
+    title,
+    workflow.categorySlug,
+    workflow.subcategorySlug,
+    workflowSlug,
+  ]);
 
   return (
     <SiteShell>
@@ -199,7 +220,16 @@ function WorkflowDetailPage() {
         <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
           <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <h2 className="text-xl font-semibold sm:text-2xl">Complete Prompt</h2>
-            <CopyButton text={workflow.prompt} />
+            <CopyButton
+              text={workflow.prompt}
+              eventName="copy_prompt"
+              eventParams={{
+                workflow_slug: workflowSlug,
+                workflow_title: title,
+                category: workflow.categorySlug,
+                subcategory: workflow.subcategorySlug,
+              }}
+            />
           </div>
 
           <pre className="whitespace-pre-wrap rounded-xl bg-muted p-3 text-[13px] leading-6 text-foreground sm:p-4 sm:text-sm">
@@ -315,7 +345,16 @@ function WorkflowDetailPage() {
               <div key={fixPrompt.issue} className="rounded-xl border p-4">
                 <div className="mb-3 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <h3 className="font-semibold">{fixPrompt.issue}</h3>
-                  <CopyButton text={fixPrompt.fix} label="Copy fix" />
+                  <CopyButton
+                    text={fixPrompt.fix}
+                    label="Copy fix"
+                    eventName="copy_fix_prompt"
+                    eventParams={{
+                      workflow_slug: workflowSlug,
+                      workflow_title: title,
+                      fix_issue: fixPrompt.issue,
+                    }}
+                  />
                 </div>
 
                 <p className="whitespace-pre-wrap text-sm leading-6 text-muted-foreground">

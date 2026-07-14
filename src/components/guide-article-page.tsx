@@ -1,6 +1,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import type { Guide } from "@/data/guides";
+import { trackEvent } from "@/lib/analytics";
 
 export function GuideArticlePage({ guide }: { guide: Guide }) {
   return (
@@ -133,6 +134,14 @@ export function GuideArticlePage({ guide }: { guide: Guide }) {
                     <a
                       key={resource.href}
                       href={resource.href}
+                      onClick={() =>
+                        trackEvent("content_select", {
+                          content_type: "guide_related_resource",
+                          content_title: resource.title,
+                          destination: resource.href,
+                          guide_slug: guide.slug,
+                        })
+                      }
                       className="group flex min-h-full flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-6"
                     >
                       <h3 className="font-display text-xl font-semibold text-ink group-hover:underline">
@@ -163,6 +172,13 @@ export function GuideArticlePage({ guide }: { guide: Guide }) {
                   </div>
                   <a
                     href="/workflows"
+                    onClick={() =>
+                      trackEvent("cta_click", {
+                        cta_name: "browse_workflows",
+                        cta_location: "guide_footer",
+                        guide_slug: guide.slug,
+                      })
+                    }
                     className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-md bg-accent px-5 font-medium text-white transition hover:opacity-90"
                   >
                     Browse workflows
