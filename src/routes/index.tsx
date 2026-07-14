@@ -10,11 +10,11 @@ const faqs = [
   },
   {
     q: "Which AI tools do the prompts work with?",
-    a: "ListingReady workflows are primarily tested with ChatGPT image generation. Each workflow page shows the recommended AI, tested model and exact settings used.",
+    a: "ListingsReady workflows are primarily tested with ChatGPT image generation. Each workflow page shows the recommended AI, tested model and exact settings used.",
   },
   {
     q: "Do I need to know how to write prompts?",
-    a: "No. The whole point of ListingReady is that the prompt writing is already done. You copy the workflow, paste your product context in the marked fields, and generate.",
+    a: "No. The whole point of ListingsReady is that the prompt writing is already done. You copy the workflow, paste your product context in the marked fields, and generate.",
   },
   {
     q: "Will the images meet Amazon or Etsy image requirements?",
@@ -25,8 +25,8 @@ const faqs = [
     a: "Nothing about generative AI is guaranteed. What tested workflows do is dramatically reduce the number of tries — most workflows land a usable image in one or two generations instead of ten or twenty.",
   },
   {
-    q: "Is ListingReady affiliated with Amazon, Shopify, Etsy, OpenAI or Midjourney?",
-    a: "No. ListingReady is an independent library of prompt workflows and is not affiliated with, endorsed by, or sponsored by any marketplace or AI provider.",
+    q: "Is ListingsReady affiliated with Amazon, Shopify, Etsy, OpenAI or Midjourney?",
+    a: "No. ListingsReady is an independent library of prompt workflows and is not affiliated with, endorsed by, or sponsored by any marketplace or AI provider.",
   },
 ];
 
@@ -92,7 +92,7 @@ function HomePage() {
               Stop regenerating the same product shot to get one usable image.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              ListingReady is a tested library of prompt workflows for product photography. Copy the exact
+              ListingsReady is a tested library of prompt workflows for product photography. Copy the exact
               prompt, paste it into ChatGPT image generation, and get a listing-ready image without the
               guesswork.
             </p>
@@ -240,12 +240,12 @@ even soft studio lighting, no shadow bleed, listing ready.`}
             From the founder
           </p>
           <blockquote className="mt-5 border-l-2 border-accent pl-6 font-display text-xl leading-relaxed text-ink md:text-2xl">
-            I built ListingReady after burning through generation credits trying to swap a product background
+            I built ListingsReady after burning through generation credits trying to swap a product background
             without the garment color drifting. If you sell online and you're tired of the same problem, these
             are the exact prompts that worked for me — tested ahead of time so you don't have to find them
             yourself.
           </blockquote>
-          <p className="mt-6 text-sm text-muted-foreground">— The ListingReady team</p>
+          <p className="mt-6 text-sm text-muted-foreground">— The ListingsReady team</p>
         </div>
       </section>
 
@@ -311,14 +311,14 @@ function BeforeAfter() {
         <div className="aspect-square overflow-hidden border border-border bg-paper-alt">
           <img
             src={heroAfter}
-            alt="ListingReady workflow output — burgundy t-shirt on clean white background, listing ready"
+            alt="ListingsReady workflow output — burgundy t-shirt on clean white background, listing ready"
             width={1024}
             height={1024}
             className="h-full w-full object-cover"
           />
         </div>
         <figcaption className="mt-3 text-xs uppercase tracking-[0.14em] text-accent">
-          ListingReady workflow
+          ListingsReady workflow
         </figcaption>
       </figure>
     </div>

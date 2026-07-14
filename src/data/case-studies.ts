@@ -55,11 +55,11 @@ export const caseStudySummaries: CaseStudySummary[] = [
     title:
       "Creating an Amazon-Ready T-Shirt Main Image Without Changing the Product",
     description:
-      "A workflow test showing how ListingReady converts an ordinary T-shirt photo into a clean main listing image while prioritising colour, print, collar, stitching and proportion accuracy.",
+      "A workflow test showing how ListingsReady converts an ordinary T-shirt photo into a clean main listing image while prioritising colour, print, collar, stitching and proportion accuracy.",
     path: "/case-studies/tshirt-amazon-main-image",
     image: "/workflow-previews/wf-001.jpg",
     imageAlt:
-      "ListingReady result showing a T-shirt prepared as a clean Amazon-style main listing image",
+      "ListingsReady result showing a T-shirt prepared as a clean Amazon-style main listing image",
     published: "July 2026",
     category: "T-Shirt · Main listing image",
   },
@@ -71,7 +71,7 @@ export const caseStudySummaries: CaseStudySummary[] = [
     path: "/case-studies/jeans-ai-lifestyle-model",
     image: "/workflow-previews/wf-072.jpg",
     imageAlt:
-      "ListingReady lifestyle result showing the same jeans or pants worn by a model",
+      "ListingsReady lifestyle result showing the same jeans or pants worn by a model",
     published: "July 2026",
     category: "Jeans / Pants · Lifestyle model",
   },
@@ -83,7 +83,7 @@ export const caseStudySummaries: CaseStudySummary[] = [
     path: "/case-studies/kurti-embroidery-detail-ai",
     image: "/workflow-previews/wf-065.jpg",
     imageAlt:
-      "ListingReady close-up result highlighting the neckline and embroidery of a kurti",
+      "ListingsReady close-up result highlighting the neckline and embroidery of a kurti",
     published: "July 2026",
     category: "Kurti / Ethnic Wear · Embroidery detail",
   },
@@ -95,7 +95,7 @@ export const caseStudySummaries: CaseStudySummary[] = [
     path: "/case-studies/shirt-smart-casual-ai-lifestyle",
     image: "/workflow-previews/wf-049.jpg",
     imageAlt:
-      "ListingReady smart-casual lifestyle result featuring the same shirt",
+      "ListingsReady smart-casual lifestyle result featuring the same shirt",
     published: "July 2026",
     category: "Shirt · Smart-casual lifestyle",
   },
@@ -107,7 +107,7 @@ export const caseStudySummaries: CaseStudySummary[] = [
     path: "/case-studies/dress-ai-flat-lay",
     image: "/workflow-previews/wf-053.jpg",
     imageAlt:
-      "ListingReady flat-lay result showing the same dress on a clean neutral surface",
+      "ListingsReady flat-lay result showing the same dress on a clean neutral surface",
     published: "July 2026",
     category: "Dress · Flat lay",
   },
@@ -127,7 +127,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     seoTitle:
       "AI Jeans Lifestyle Model Case Study — Preserving Wash and Fit",
     metaDescription:
-      "See how a ListingReady workflow places jeans on an AI model while preserving the original denim wash, waistband, pockets, stitching, fit and proportions.",
+      "See how a ListingsReady workflow places jeans on an AI model while preserving the original denim wash, waistband, pockets, stitching, fit and proportions.",
     ogDescription:
       "A detailed AI jeans lifestyle test covering denim wash, waistband, pockets, fit, model styling and product preservation.",
     answer:
@@ -184,7 +184,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
     comparisonHeading:
-      "Compare the uploaded jeans with the model-worn ListingReady result",
+      "Compare the uploaded jeans with the model-worn ListingsReady result",
     evaluationHeading:
       "How to evaluate the jeans lifestyle result",
     evaluationIntro:
@@ -250,7 +250,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     seoTitle:
       "AI Kurti Embroidery Detail Case Study — Preserving the Original Design",
     metaDescription:
-      "Learn how a ListingReady workflow creates a detailed kurti close-up without changing the original embroidery, neckline, colour, print or fabric texture.",
+      "Learn how a ListingsReady workflow creates a detailed kurti close-up without changing the original embroidery, neckline, colour, print or fabric texture.",
     ogDescription:
       "A kurti detail-image test covering neckline accuracy, embroidery preservation, motifs, thread colours and fabric texture.",
     answer:
@@ -373,7 +373,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     seoTitle:
       "AI Shirt Lifestyle Image Case Study — Preserving Collar, Buttons and Pattern",
     metaDescription:
-      "See how a ListingReady workflow creates a smart-casual shirt lifestyle image while preserving the original collar, buttons, cuffs, pattern, pocket and fit.",
+      "See how a ListingsReady workflow creates a smart-casual shirt lifestyle image while preserving the original collar, buttons, cuffs, pattern, pocket and fit.",
     ogDescription:
       "A shirt lifestyle-image test covering collar shape, button placket, cuffs, pattern accuracy, styling and product visibility.",
     answer:
@@ -496,7 +496,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     seoTitle:
       "AI Dress Flat Lay Case Study — Preserving Shape, Print and Proportions",
     metaDescription:
-      "See how a ListingReady workflow converts a dress photo into a professional flat lay while preserving its neckline, print, sleeves, waistline, hem and proportions.",
+      "See how a ListingsReady workflow converts a dress photo into a professional flat lay while preserving its neckline, print, sleeves, waistline, hem and proportions.",
     ogDescription:
       "A dress flat-lay test covering silhouette, neckline, sleeves or straps, print placement, hemline, fabric arrangement and proportions.",
     answer:

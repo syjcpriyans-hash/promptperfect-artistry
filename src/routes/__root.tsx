@@ -55,15 +55,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ListingReady — Tested AI prompt workflows for product photos" },
+      { title: "ListingsReady — Tested AI prompt workflows for product photos" },
       {
         name: "description",
         content:
           "A tested library of AI prompt workflows that turn one product photo into a listing-ready image for Amazon, Shopify, Etsy, eBay and social.",
       },
-      { name: "author", content: "ListingReady" },
-      { property: "og:site_name", content: "ListingReady" },
-      { property: "og:title", content: "ListingReady — Tested AI prompt workflows for product photos" },
+      { name: "author", content: "ListingsReady" },
+      { property: "og:site_name", content: "ListingsReady" },
+      { property: "og:title", content: "ListingsReady — Tested AI prompt workflows for product photos" },
       {
         property: "og:description",
         content:
@@ -71,7 +71,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ListingReady — Tested AI prompt workflows for product photos" },
+      { name: "twitter:title", content: "ListingsReady — Tested AI prompt workflows for product photos" },
       {
         name: "twitter:description",
         content: "Tested prompt workflows for Amazon, Shopify, Etsy, eBay and social product photography.",

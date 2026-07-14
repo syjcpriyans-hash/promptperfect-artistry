@@ -25,21 +25,21 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       {
-        title: "About ListingReady — Tested AI Product Image Workflows",
+        title: "About ListingsReady — Tested AI Product Image Workflows",
       },
       {
         name: "description",
         content:
-          "Learn why ListingReady was created and how its tested AI prompt workflows help e-commerce sellers produce accurate, listing-ready product images.",
+          "Learn why ListingsReady was created and how its tested AI prompt workflows help e-commerce sellers produce accurate, listing-ready product images.",
       },
       {
         property: "og:title",
-        content: "About ListingReady — Tested AI Product Image Workflows",
+        content: "About ListingsReady — Tested AI Product Image Workflows",
       },
       {
         property: "og:description",
         content:
-          "Learn why ListingReady was created and how its tested AI workflows help sellers produce accurate product images.",
+          "Learn why ListingsReady was created and how its tested AI workflows help sellers produce accurate product images.",
       },
       {
         property: "og:url",
@@ -57,7 +57,7 @@ function AboutPage() {
         <section className="section-y border-b border-border bg-paper-alt">
           <div className="container-x max-w-4xl">
             <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
-              About ListingReady
+              About ListingsReady
             </p>
 
             <h1 className="mt-5 font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">
@@ -66,7 +66,7 @@ function AboutPage() {
             </h1>
 
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-              ListingReady is a library of tested AI prompt workflows for
+              ListingsReady is a library of tested AI prompt workflows for
               e-commerce product photography. It helps sellers create
               professional listing images while preserving the original
               product&apos;s colour, design, texture, stitching and proportions.
@@ -81,7 +81,7 @@ function AboutPage() {
                 The problem
               </p>
               <h2 className="mt-4 font-display text-3xl font-semibold text-ink md:text-4xl">
-                Why ListingReady exists
+                Why ListingsReady exists
               </h2>
             </div>
 
@@ -93,7 +93,7 @@ function AboutPage() {
                 details are invented.
               </p>
               <p>
-                ListingReady was created to solve this problem with structured,
+                ListingsReady was created to solve this problem with structured,
                 repeatable workflows instead of generic one-line prompts. Every
                 workflow is designed for a specific product-image task and
                 includes instructions focused on keeping the product accurate.
@@ -139,10 +139,10 @@ function AboutPage() {
                 Built for e-commerce
               </p>
               <h2 className="mt-4 font-display text-3xl font-semibold text-ink md:text-4xl">
-                Who ListingReady is for
+                Who ListingsReady is for
               </h2>
               <p className="mt-4 max-w-xl leading-7 text-muted-foreground">
-                ListingReady is designed for businesses and creators who need
+                ListingsReady is designed for businesses and creators who need
                 professional product images without repeating the same
                 prompt-writing and correction process for every listing.
               </p>
@@ -201,14 +201,14 @@ function AboutPage() {
 
             <div className="mt-6 space-y-5 text-base leading-8 text-muted-foreground">
               <p>
-                ListingReady began after repeated attempts to create product
+                ListingsReady began after repeated attempts to create product
                 images with AI resulted in altered colours, incorrect details
                 and unusable outputs.
               </p>
               <p>
                 The problem was not a lack of AI tools—it was the lack of
                 reliable instructions designed specifically for product
-                preservation. ListingReady turns that testing process into
+                preservation. ListingsReady turns that testing process into
                 practical workflows that other sellers can use without
                 repeating the same trial and error.
               </p>
@@ -223,7 +223,7 @@ function AboutPage() {
                 Independent resource
               </p>
               <p className="mt-4 text-lg leading-8 text-ink">
-                ListingReady is an independent workflow library. It is not
+                ListingsReady is an independent workflow library. It is not
                 affiliated with or endorsed by Amazon, Shopify, Etsy, OpenAI,
                 Google, Midjourney or any other marketplace or AI provider.
               </p>

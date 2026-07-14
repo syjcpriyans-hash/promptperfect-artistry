@@ -39,7 +39,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
             </h1>
 
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-              This case study examines a real ListingReady workflow and the
+              This case study examines a real ListingsReady workflow and the
               product-specific checks required before an AI-generated image is
               used in an e-commerce listing.
             </p>
@@ -123,7 +123,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
           <div className="container-x max-w-5xl">
             <div className="max-w-3xl">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
-                4. The ListingReady approach
+                4. The ListingsReady approach
               </p>
               <h2 className="mt-4 font-display text-3xl font-semibold text-ink md:text-4xl">
                 {study.approachHeading}

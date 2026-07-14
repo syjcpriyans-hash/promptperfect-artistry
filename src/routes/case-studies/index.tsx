@@ -5,15 +5,15 @@ import { caseStudySummaries } from "@/data/case-studies";
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
     meta: [
-      { title: "AI Product Image Case Studies — ListingReady" },
+      { title: "AI Product Image Case Studies — ListingsReady" },
       {
         name: "description",
         content:
-          "Explore real ListingReady workflow tests showing how AI product-image prompts are evaluated for product accuracy, common failures and listing readiness.",
+          "Explore real ListingsReady workflow tests showing how AI product-image prompts are evaluated for product accuracy, common failures and listing readiness.",
       },
       {
         property: "og:title",
-        content: "AI Product Image Case Studies — ListingReady",
+        content: "AI Product Image Case Studies — ListingsReady",
       },
       {
         property: "og:description",
@@ -36,11 +36,11 @@ function CaseStudiesPage() {
               Workflow evidence
             </p>
             <h1 className="mt-5 font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">
-              ListingReady Case Studies
+              ListingsReady Case Studies
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
               Detailed tests showing the original product-image problem, the
-              ListingReady approach, the generated result, evaluation
+              ListingsReady approach, the generated result, evaluation
               checkpoints, remaining limitations and the workflow used.
             </p>
           </div>

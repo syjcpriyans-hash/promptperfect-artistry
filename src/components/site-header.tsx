@@ -12,8 +12,8 @@ const nav = [
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <img
-      src="/brand/listingready-logo.png"
-      alt="ListingReady"
+      src="/brand/listingsready-logo.png"
+      alt="ListingsReady"
       width={1000}
       height={138}
       className={`h-9 w-auto object-contain sm:h-11 ${className}`}
@@ -26,7 +26,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <Link to="/" className="shrink-0" aria-label="ListingReady home">
+        <Link to="/" className="shrink-0" aria-label="ListingsReady home">
           <Wordmark />
         </Link>
 

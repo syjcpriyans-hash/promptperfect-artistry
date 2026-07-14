@@ -23,7 +23,6 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link to="/categories" className="hover:text-ink">Categories</Link></li>
               <li><Link to="/workflows" className="hover:text-ink">Workflows</Link></li>
-              <li><Link to="/case-studies" className="hover:text-ink">Case Studies</Link></li>
               <li><Link to="/about" className="hover:text-ink">About</Link></li>
               <li><Link to="/methodology" className="hover:text-ink">How We Test</Link></li>
               <li><Link to="/faq" className="hover:text-ink">FAQ</Link></li>
@@ -39,12 +38,12 @@ export function SiteFooter() {
         </div>
         <div className="mt-10 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
           <p>
-            ListingReady is an independent library of prompt workflows. We are not affiliated with, endorsed by,
+            ListingsReady is an independent library of prompt workflows. We are not affiliated with, endorsed by,
             or sponsored by Amazon, Shopify, Etsy, eBay, Instagram, TikTok, Facebook, OpenAI, Midjourney or Google.
             AI-generated images should be reviewed for accuracy and reviewed against each marketplace's image and
             content policies before you publish them.
           </p>
-          <p className="mt-3">© {new Date().getFullYear()} ListingReady. All rights reserved.</p>
+          <p className="mt-3">© {new Date().getFullYear()} ListingsReady. All rights reserved.</p>
         </div>
       </div>
     </footer>
