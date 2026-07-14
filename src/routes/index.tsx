@@ -3,33 +3,6 @@ import { SiteShell } from "@/components/site-shell";
 import heroBefore from "@/assets/hero-before.jpg";
 import heroAfter from "@/assets/hero-after.jpg";
 
-const faqs = [
-  {
-    q: "What exactly do I get?",
-    a: "You get a library of copy-paste prompt workflows for product photography. Each workflow includes a complete prompt tested with ChatGPT image generation, recommended settings, common mistakes and fix prompts for adjusting the result.",
-  },
-  {
-    q: "Which AI tools do the prompts work with?",
-    a: "ListingsReady workflows are primarily tested with ChatGPT image generation. Each workflow page shows the recommended AI, tested model and exact settings used.",
-  },
-  {
-    q: "Do I need to know how to write prompts?",
-    a: "No. The whole point of ListingsReady is that the prompt writing is already done. You copy the workflow, paste your product context in the marked fields, and generate.",
-  },
-  {
-    q: "Will the images meet Amazon or Etsy image requirements?",
-    a: "The workflows are built with each channel's image guidelines in mind — for example pure white backgrounds for Amazon main images. You should still review every image against the current marketplace policy before you publish.",
-  },
-  {
-    q: "Do the prompts guarantee a perfect image on the first try?",
-    a: "Nothing about generative AI is guaranteed. What tested workflows do is dramatically reduce the number of tries — most workflows land a usable image in one or two generations instead of ten or twenty.",
-  },
-  {
-    q: "Is ListingsReady affiliated with Amazon, Shopify, Etsy, OpenAI or Midjourney?",
-    a: "No. ListingsReady is an independent library of prompt workflows and is not affiliated with, endorsed by, or sponsored by any marketplace or AI provider.",
-  },
-];
-
 const categories = [
   { title: "Apparel", sub: "T-shirts, hoodies, accessories" },
   { title: "Beauty & skincare", sub: "Bottles, tubes, jars" },
@@ -86,22 +59,7 @@ const newWorkflows = [
   },
 ];
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export const Route = createFileRoute("/")({
-  head: () => ({
-    scripts: [
-      { type: "application/ld+json", children: JSON.stringify(faqJsonLd) },
-    ],
-  }),
   component: HomePage,
 });
 
@@ -291,29 +249,6 @@ function HomePage() {
             yourself.
           </blockquote>
           <p className="mt-6 text-sm text-muted-foreground">— The ListingsReady team</p>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="section-y bg-paper-alt">
-        <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.5fr]">
-          <div>
-            <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
-              Frequently asked questions
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              Written for real answers, and structured so voice search and AI Overviews can quote them
-              directly.
-            </p>
-          </div>
-          <dl className="divide-y divide-border border-y border-border">
-            {faqs.map((f) => (
-              <div key={f.q} className="py-6">
-                <dt className="font-display text-base font-medium text-ink">{f.q}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </section>
 
