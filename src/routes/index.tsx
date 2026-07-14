@@ -59,6 +59,33 @@ const steps = [
 
 const channels = ["Amazon", "Shopify", "Etsy", "eBay", "Instagram", "TikTok", "Facebook"];
 
+const newWorkflows = [
+  {
+    id: "wf-072",
+    title: "Lifestyle model image",
+    image: "/workflow-previews/wf-072.jpg",
+    alt: "Jeans workflow preview showing women’s blue jeans styled on a model in a lifestyle setting.",
+  },
+  {
+    id: "wf-080",
+    title: "Fabric denim wash up close up",
+    image: "/workflow-previews/wf-080.jpg",
+    alt: "Jeans workflow preview showing a close-up of the denim fabric wash and texture.",
+  },
+  {
+    id: "wf-079",
+    title: "Folded packaging presentation",
+    image: "/workflow-previews/wf-079.jpg",
+    alt: "Jeans workflow preview showing folded jeans in a packaging presentation.",
+  },
+  {
+    id: "wf-075",
+    title: "Waistband pocket details",
+    image: "/workflow-previews/wf-075.jpg",
+    alt: "Jeans workflow preview showing waistband and pocket detail close-up.",
+  },
+];
+
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -120,32 +147,50 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Featured workflow */}
+      {/* New workflows */}
       <section id="example" className="section-y">
         <div className="container-x">
-          <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">Featured workflow</p>
-          <div className="mt-4 flex flex-col justify-between gap-6 border border-border p-8 md:flex-row md:items-end md:p-10">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
-              <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">
-                Amazon main image — apparel on white background
+              <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">New workflows</p>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-4xl">
+                Latest jeans workflow additions
               </h2>
-              <p className="mt-3 text-muted-foreground">
-                Produces a compliant Amazon main image: pure #FFFFFF background, garment centered, true color
-                held, sharp fabric detail. Tested with ChatGPT image generation using the model and settings
-                shown inside the workflow.
+              <p className="mt-4 text-muted-foreground">
+                Four newly added workflows from the jeans collection. Click any card to open the full workflow.
               </p>
-              <div className="mt-5">
-                <pre className="overflow-x-auto rounded-md border border-border bg-paper-alt p-4 text-[13px] leading-relaxed text-ink">
-{`Professional Amazon main product image of [PRODUCT],
-folded and centered on a pure #FFFFFF seamless background.
-Hold true garment color, keep pattern and stitching sharp,
-even soft studio lighting, no shadow bleed, listing ready.`}
-                </pre>
-              </div>
             </div>
-            <Link to="/workflows" className="btn-primary shrink-0">
-              View full workflow
+            <Link
+              to="/categories/$category/$subcategory"
+              params={{ category: "clothes", subcategory: "jeans-pants" }}
+              className="text-sm font-medium text-ink underline-offset-4 hover:underline"
+            >
+              View all jeans workflows →
             </Link>
+          </div>
+
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {newWorkflows.map((item) => (
+              <Link
+                key={item.id}
+                to="/workflows/$id"
+                params={{ id: item.id }}
+                className="group overflow-hidden border border-border bg-paper transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="aspect-[4/5] overflow-hidden bg-paper-alt p-3">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="border-t border-border p-5">
+                  <h3 className="font-display text-lg font-medium text-ink">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">Open workflow</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
