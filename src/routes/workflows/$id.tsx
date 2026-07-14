@@ -2,10 +2,15 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { Button } from "@/components/ui/button";
 import { WorkflowImageComparison } from "@/components/workflow-image-comparison";
 import { getWorkflowAbout } from "@/lib/workflow-about";
-import { findWorkflowByPublicParam, getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import {
+  findWorkflowByPublicParam,
+  getWorkflowDisplayTitle,
+  getWorkflowPublicSlug,
+} from "@/lib/workflow-display";
 import { isSizeGuideWorkflow } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategory, workflows } from "@/data/all-workflows";
 
@@ -13,9 +18,24 @@ export const Route = createFileRoute("/workflows/$id")({
   loader: ({ params }) => {
     const workflow = findWorkflowByPublicParam(params.id, workflows);
     if (!workflow || isSizeGuideWorkflow(workflow)) throw notFound();
+
     const category = getCategory(workflow.categorySlug);
-    const subcategory = getSubcategory(workflow.categorySlug, workflow.subcategorySlug);
-    return { workflow, category, subcategory };
+    const subcategory = getSubcategory(
+      workflow.categorySlug,
+      workflow.subcategorySlug,
+    );
+
+    const relatedWorkflows = workflows
+      .filter(
+        (item) =>
+          item.id !== workflow.id &&
+          item.categorySlug === workflow.categorySlug &&
+          item.subcategorySlug === workflow.subcategorySlug &&
+          !isSizeGuideWorkflow(item),
+      )
+      .slice(0, 4);
+
+    return { workflow, category, subcategory, relatedWorkflows };
   },
   head: ({ loaderData }) => ({
     meta: [
@@ -24,13 +44,22 @@ export const Route = createFileRoute("/workflows/$id")({
           ? `${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
           : "Workflow — ListingReady",
       },
-      { name: "description", content: "Copy-paste-ready AI product image prompt workflow." },
+      {
+        name: "description",
+        content: "Copy-paste-ready AI product image prompt workflow.",
+      },
     ],
   }),
   component: WorkflowDetailPage,
 });
 
-function CopyButton({ text, label = "Copy prompt" }: { text: string; label?: string }) {
+function CopyButton({
+  text,
+  label = "Copy prompt",
+}: {
+  text: string;
+  label?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -45,14 +74,19 @@ function CopyButton({ text, label = "Copy prompt" }: { text: string; label?: str
 
   return (
     <Button type="button" variant="outline" size="sm" onClick={handleCopy}>
-      {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
+      {copied ? (
+        <Check className="mr-2 h-4 w-4" />
+      ) : (
+        <Copy className="mr-2 h-4 w-4" />
+      )}
       {copied ? "Copied!" : label}
     </Button>
   );
 }
 
 function WorkflowDetailPage() {
-  const { workflow, category, subcategory } = Route.useLoaderData();
+  const { workflow, category, subcategory, relatedWorkflows } =
+    Route.useLoaderData();
   const title = getWorkflowDisplayTitle(workflow);
   const about = getWorkflowAbout(workflow);
 
@@ -63,9 +97,11 @@ function WorkflowDetailPage() {
           <Link to="/categories" className="hover:text-foreground">
             Categories
           </Link>
+
           {category && (
             <>
-              {" "}/ {" "}
+              {" "}
+              /{" "}
               <Link
                 to="/categories/$category"
                 params={{ category: category.slug }}
@@ -75,12 +111,17 @@ function WorkflowDetailPage() {
               </Link>
             </>
           )}
+
           {subcategory && category && (
             <>
-              {" "}/ {" "}
+              {" "}
+              /{" "}
               <Link
                 to="/categories/$category/$subcategory"
-                params={{ category: category.slug, subcategory: subcategory.slug }}
+                params={{
+                  category: category.slug,
+                  subcategory: subcategory.slug,
+                }}
                 className="hover:text-foreground"
               >
                 {subcategory.title}
@@ -92,7 +133,8 @@ function WorkflowDetailPage() {
         <div>
           <h1 className="text-4xl font-semibold tracking-tight">{title}</h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Copy the complete prompt, upload your product photo, and use the fix prompts only when the AI changes the product.
+            Copy the complete prompt, upload your product photo, and use the fix
+            prompts only when the AI changes the product.
           </p>
         </div>
 
@@ -114,6 +156,7 @@ function WorkflowDetailPage() {
             <h2 className="text-2xl font-semibold">Complete Prompt</h2>
             <CopyButton text={workflow.prompt} />
           </div>
+
           <pre className="whitespace-pre-wrap rounded-xl bg-muted p-4 text-sm leading-6 text-foreground">
             {workflow.prompt}
           </pre>
@@ -137,16 +180,30 @@ function WorkflowDetailPage() {
           <h2 className="text-2xl font-semibold">Settings in ChatGPT</h2>
           <dl className="mt-4 grid gap-3 sm:grid-cols-3">
             <div className="rounded-xl bg-muted px-4 py-3">
-              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Model</dt>
-              <dd className="mt-1 text-base font-semibold text-foreground">GPT-5.5</dd>
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Model
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                GPT-5.5
+              </dd>
             </div>
+
             <div className="rounded-xl bg-muted px-4 py-3">
-              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Intelligence</dt>
-              <dd className="mt-1 text-base font-semibold text-foreground">High</dd>
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Intelligence
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                High
+              </dd>
             </div>
+
             <div className="rounded-xl bg-muted px-4 py-3">
-              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Mode</dt>
-              <dd className="mt-1 text-base font-semibold text-foreground">Create an Image</dd>
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Mode
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                Create an Image
+              </dd>
             </div>
           </dl>
         </section>
@@ -158,20 +215,29 @@ function WorkflowDetailPage() {
               <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Last tested
               </dt>
-              <dd className="mt-1 text-base font-semibold text-foreground">July 2026</dd>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                July 2026
+              </dd>
             </div>
+
             <div className="rounded-xl bg-muted px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Tested with
               </dt>
-              <dd className="mt-1 text-base font-semibold text-foreground">GPT-5.5</dd>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                GPT-5.5
+              </dd>
             </div>
+
             <div className="rounded-xl bg-muted px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Workflow version
               </dt>
-              <dd className="mt-1 text-base font-semibold text-foreground">1.0</dd>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                1.0
+              </dd>
             </div>
+
             <div className="rounded-xl bg-muted px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Typical result
@@ -187,7 +253,10 @@ function WorkflowDetailPage() {
           <h2 className="text-2xl font-semibold">Common Mistakes</h2>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {workflow.commonMistakes.map((mistake) => (
-              <li key={mistake} className="rounded-xl bg-muted px-3 py-2 text-sm text-muted-foreground">
+              <li
+                key={mistake}
+                className="rounded-xl bg-muted px-3 py-2 text-sm text-muted-foreground"
+              >
                 {mistake}
               </li>
             ))}
@@ -203,6 +272,7 @@ function WorkflowDetailPage() {
                   <h3 className="font-semibold">{fixPrompt.issue}</h3>
                   <CopyButton text={fixPrompt.fix} label="Copy fix" />
                 </div>
+
                 <p className="whitespace-pre-wrap text-sm leading-6 text-muted-foreground">
                   {fixPrompt.fix}
                 </p>
@@ -211,11 +281,44 @@ function WorkflowDetailPage() {
           </div>
         </section>
 
+        {relatedWorkflows.length > 0 && (
+          <section className="mt-10">
+            <div className="mb-5">
+              <h2 className="text-2xl font-semibold">Related Workflows</h2>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Explore more image workflows for the same product type.
+              </p>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              {relatedWorkflows.map((relatedWorkflow) => (
+                <Link
+                  key={relatedWorkflow.id}
+                  to="/workflows/$id"
+                  params={{ id: getWorkflowPublicSlug(relatedWorkflow) }}
+                  className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                >
+                  <WorkflowPreviewImage workflow={relatedWorkflow} />
+
+                  <div className="p-4">
+                    <h3 className="line-clamp-2 text-base font-semibold leading-snug group-hover:underline">
+                      {getWorkflowDisplayTitle(relatedWorkflow)}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         {subcategory && category && (
           <div className="mt-10">
             <Link
               to="/categories/$category/$subcategory"
-              params={{ category: category.slug, subcategory: subcategory.slug }}
+              params={{
+                category: category.slug,
+                subcategory: subcategory.slug,
+              }}
               className="text-sm font-medium hover:underline"
             >
               ← Back to {subcategory.title} workflows
