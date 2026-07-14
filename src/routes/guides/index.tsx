@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { guides } from "@/data/guides";
@@ -40,8 +40,8 @@ function GuidesPage() {
             Practical guidance for more accurate AI product images
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            Learn how to protect product identity, diagnose common AI failures and
-            create listing images that remain faithful to the item being sold.
+            Learn how to protect product identity, improve source photography,
+            diagnose common AI failures and create more reliable listing images.
           </p>
         </div>
       </section>
@@ -61,13 +61,12 @@ function GuidesPage() {
                 </div>
 
                 <h2 className="mt-5 font-display text-2xl font-semibold leading-tight text-ink sm:text-3xl">
-                  <Link
-                    to="/guides/$slug"
-                    params={{ slug: guide.slug }}
+                  <a
+                    href={`/guides/${guide.slug}`}
                     className="underline-offset-4 hover:underline"
                   >
                     {guide.title}
-                  </Link>
+                  </a>
                 </h2>
 
                 <p className="mt-4 flex-1 leading-7 text-muted-foreground">
@@ -78,14 +77,13 @@ function GuidesPage() {
                   <p className="text-sm text-muted-foreground">
                     Published {guide.published}
                   </p>
-                  <Link
-                    to="/guides/$slug"
-                    params={{ slug: guide.slug }}
+                  <a
+                    href={`/guides/${guide.slug}`}
                     className="inline-flex min-h-11 items-center gap-2 font-medium text-ink underline-offset-4 hover:underline"
                   >
                     Read guide
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
+                  </a>
                 </div>
               </article>
             ))}

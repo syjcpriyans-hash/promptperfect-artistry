@@ -27,7 +27,7 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
               <li><Link to="/categories" className="inline-flex min-h-10 items-center hover:text-ink">Categories</Link></li>
               <li><Link to="/workflows" className="inline-flex min-h-10 items-center hover:text-ink">Workflows</Link></li>
-              <li><Link to="/guides" className="inline-flex min-h-10 items-center hover:text-ink">Guides</Link></li>
+              <li><a href="/guides" className="inline-flex min-h-10 items-center hover:text-ink">Guides</a></li>
               <li><Link to="/case-studies" className="inline-flex min-h-10 items-center hover:text-ink">Case Studies</Link></li>
               <li><Link to="/about" className="inline-flex min-h-10 items-center hover:text-ink">About</Link></li>
               <li><Link to="/methodology" className="inline-flex min-h-10 items-center hover:text-ink">How We Test</Link></li>
