@@ -152,6 +152,38 @@ function WorkflowDetailPage() {
         </section>
 
         <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold">Workflow Testing</h2>
+          <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Last tested
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">July 2026</dd>
+            </div>
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Tested with
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">GPT-5.5</dd>
+            </div>
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Workflow version
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">1.0</dd>
+            </div>
+            <div className="rounded-xl bg-muted px-4 py-3">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Typical result
+              </dt>
+              <dd className="mt-1 text-base font-semibold text-foreground">
+                1–2 generations
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
           <h2 className="text-2xl font-semibold">Common Mistakes</h2>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {workflow.commonMistakes.map((mistake) => (
