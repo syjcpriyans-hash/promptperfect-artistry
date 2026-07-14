@@ -6,11 +6,11 @@ import heroAfter from "@/assets/hero-after.jpg";
 const faqs = [
   {
     q: "What exactly do I get?",
-    a: "You get a library of copy-paste prompt workflows for product photography. Each workflow is a complete prompt — tested in ChatGPT, Midjourney or Gemini — plus a fix prompt for when a result needs adjustment.",
+    a: "You get a library of copy-paste prompt workflows for product photography. Each workflow includes a complete prompt tested with ChatGPT image generation, recommended settings, common mistakes and fix prompts for adjusting the result.",
   },
   {
     q: "Which AI tools do the prompts work with?",
-    a: "The prompts are written for ChatGPT (GPT-4o and image generation), Midjourney, and Google Gemini. Each workflow lists which tool it was tested in and any tool-specific variants.",
+    a: "ListingReady workflows are primarily tested with ChatGPT image generation. Each workflow page shows the recommended AI, tested model and exact settings used.",
   },
   {
     q: "Do I need to know how to write prompts?",
@@ -54,7 +54,7 @@ const steps = [
   { n: "01", t: "Choose your product type", d: "Apparel, beauty, food, electronics, jewelry or a lifestyle scene." },
   { n: "02", t: "Pick the channel you're shooting for", d: "Amazon main, Shopify PDP, Etsy hero, eBay listing, or social." },
   { n: "03", t: "Copy the matched prompt workflow", d: "One complete, tested prompt — with the fields you need to fill in marked." },
-  { n: "04", t: "Paste into ChatGPT, Midjourney or Gemini", d: "If something looks off, use the included fix prompt to correct it in one pass." },
+  { n: "04", t: "Paste into ChatGPT image generation", d: "Use the model and settings shown inside the workflow. If something looks off, apply the included fix prompt." },
 ];
 
 const channels = ["Amazon", "Shopify", "Etsy", "eBay", "Instagram", "TikTok", "Facebook"];
@@ -93,7 +93,7 @@ function HomePage() {
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               ListingReady is a tested library of prompt workflows for product photography. Copy the exact
-              prompt, paste it into ChatGPT, Midjourney or Gemini, get a listing-ready image without the
+              prompt, paste it into ChatGPT image generation, and get a listing-ready image without the
               guesswork.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -131,7 +131,8 @@ function HomePage() {
               </h2>
               <p className="mt-3 text-muted-foreground">
                 Produces a compliant Amazon main image: pure #FFFFFF background, garment centered, true color
-                held, sharp fabric detail. Tested in ChatGPT image generation and Midjourney v6.
+                held, sharp fabric detail. Tested with ChatGPT image generation using the model and settings
+                shown inside the workflow.
               </p>
               <div className="mt-5">
                 <pre className="overflow-x-auto rounded-md border border-border bg-paper-alt p-4 text-[13px] leading-relaxed text-ink">
