@@ -6,6 +6,7 @@ const nav = [
   { to: "/", label: "Home" },
   { to: "/categories", label: "Categories" },
   { to: "/workflows", label: "Workflows" },
+  { to: "/guides", label: "Guides" },
   { to: "/case-studies", label: "Case Studies" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
@@ -29,7 +30,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 shadow-[0_1px_0_rgba(15,36,57,0.03)] backdrop-blur">
-      <div className="relative mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:min-h-[72px] lg:px-8">
+      <div className="relative mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 xl:min-h-[72px] lg:px-8">
         <Link
           to="/"
           className="shrink-0"
@@ -40,7 +41,7 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className="hidden items-center gap-5 text-sm font-medium text-muted-foreground lg:absolute lg:left-1/2 lg:flex lg:-translate-x-1/2 xl:gap-7"
+          className="hidden items-center gap-5 text-sm font-medium text-muted-foreground xl:absolute xl:left-1/2 xl:flex xl:-translate-x-1/2 xl:gap-6 2xl:gap-7"
           aria-label="Primary navigation"
         >
           {nav.map((item) => (
@@ -56,7 +57,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border bg-paper text-ink transition hover:bg-paper-alt lg:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border bg-paper text-ink transition hover:bg-paper-alt xl:hidden"
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
@@ -73,7 +74,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="border-t border-border bg-background lg:hidden"
+          className="border-t border-border bg-background xl:hidden"
         >
           <nav
             className="mx-auto grid w-full max-w-7xl gap-2 px-4 py-4 sm:grid-cols-2 sm:px-6"

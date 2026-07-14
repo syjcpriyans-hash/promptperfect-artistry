@@ -11,6 +11,8 @@ const staticPaths = [
   "/",
   "/categories",
   "/workflows",
+  "/guides",
+  "/guides/how-to-stop-ai-changing-product-colours-logos-details",
   "/case-studies",
   "/about",
   "/faq",
