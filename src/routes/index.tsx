@@ -61,28 +61,28 @@ const channels = ["Amazon", "Shopify", "Etsy", "eBay", "Instagram", "TikTok", "F
 
 const newWorkflows = [
   {
-    id: "wf-072",
-    title: "Lifestyle model image",
+    slug: "lifestyle-model-image-jeans-pants",
+    title: "Lifestyle Model Image",
     image: "/workflow-previews/wf-072.jpg",
-    alt: "Jeans workflow preview showing women’s blue jeans styled on a model in a lifestyle setting.",
+    alt: "Jeans lifestyle model workflow showing the exact jeans worn by a model.",
   },
   {
-    id: "wf-080",
-    title: "Fabric denim wash up close up",
+    slug: "fabric-denim-wash-close-up-jeans-pants",
+    title: "Fabric / Denim Wash Close-Up",
+    image: "/workflow-previews/wf-076.jpg",
+    alt: "Jeans fabric and denim wash close-up showing texture, fade and stitching.",
+  },
+  {
+    slug: "folded-packaging-presentation-jeans-pants",
+    title: "Folded / Packaging Presentation",
     image: "/workflow-previews/wf-080.jpg",
-    alt: "Jeans workflow preview showing a close-up of the denim fabric wash and texture.",
+    alt: "Jeans folded beside simple packaging for an e-commerce presentation.",
   },
   {
-    id: "wf-079",
-    title: "Folded packaging presentation",
-    image: "/workflow-previews/wf-079.jpg",
-    alt: "Jeans workflow preview showing folded jeans in a packaging presentation.",
-  },
-  {
-    id: "wf-075",
-    title: "Waistband pocket details",
+    slug: "waistband-pocket-detail-image-jeans-pants",
+    title: "Waistband / Pocket Details",
     image: "/workflow-previews/wf-075.jpg",
-    alt: "Jeans workflow preview showing waistband and pocket detail close-up.",
+    alt: "Jeans waistband and pocket detail showing the button, belt loops and stitching.",
   },
 ];
 
@@ -172,9 +172,9 @@ function HomePage() {
           <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {newWorkflows.map((item) => (
               <Link
-                key={item.id}
+                key={item.slug}
                 to="/workflows/$id"
-                params={{ id: item.id }}
+                params={{ id: item.slug }}
                 className="group overflow-hidden border border-border bg-paper transition hover:-translate-y-0.5 hover:shadow-sm"
               >
                 <div className="aspect-[4/5] overflow-hidden bg-paper-alt p-3">
