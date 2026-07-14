@@ -4,6 +4,7 @@ import { Check, Copy } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { WorkflowImageComparison } from "@/components/workflow-image-comparison";
+import { getWorkflowAbout } from "@/lib/workflow-about";
 import { findWorkflowByPublicParam, getWorkflowDisplayTitle } from "@/lib/workflow-display";
 import { isSizeGuideWorkflow } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategory, workflows } from "@/data/all-workflows";
@@ -53,6 +54,7 @@ function CopyButton({ text, label = "Copy prompt" }: { text: string; label?: str
 function WorkflowDetailPage() {
   const { workflow, category, subcategory } = Route.useLoaderData();
   const title = getWorkflowDisplayTitle(workflow);
+  const about = getWorkflowAbout(workflow);
 
   return (
     <SiteShell>
@@ -93,6 +95,17 @@ function WorkflowDetailPage() {
             Copy the complete prompt, upload your product photo, and use the fix prompts only when the AI changes the product.
           </p>
         </div>
+
+        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold">About this Workflow</h2>
+          <ol className="mt-4 space-y-3 pl-6 text-sm leading-6 text-muted-foreground [list-style-type:decimal]">
+            {about.map((item) => (
+              <li key={item} className="pl-1">
+                {item}
+              </li>
+            ))}
+          </ol>
+        </section>
 
         <WorkflowImageComparison workflow={workflow} />
 
