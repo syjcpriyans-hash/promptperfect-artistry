@@ -198,7 +198,7 @@ export function getWorkflowSeoTitle(
   const product = getProductProfile(workflow.subcategorySlug);
   const kind = getSeoKind(getWorkflowKind(workflow.title));
 
-  return `Amazon ${product.title} ${kind} Prompt — ListingReady`;
+  return `Amazon ${product.title} ${kind} Prompt — ListingsReady`;
 }
 
 export function getWorkflowSeoDescription(

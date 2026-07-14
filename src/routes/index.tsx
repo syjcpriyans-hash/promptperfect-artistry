@@ -68,12 +68,12 @@ function HomePage() {
     <SiteShell>
       {/* Hero */}
       <section className="section-y">
-        <div className="container-x grid gap-14 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+        <div className="container-x grid gap-10 sm:gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
               For Amazon, Shopify, Etsy, eBay and social sellers
             </p>
-            <h1 className="mt-5 font-display text-4xl leading-[1.08] tracking-tight text-ink md:text-5xl lg:text-[3.5rem]">
+            <h1 className="mt-5 font-display text-3xl leading-[1.08] tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-[3.5rem]">
               Stop regenerating the same product shot to get one usable image.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
@@ -81,7 +81,7 @@ function HomePage() {
               prompt, paste it into ChatGPT image generation, and get a listing-ready image without the
               guesswork.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link to="/workflows" className="btn-primary">Browse workflows</Link>
               <a href="#example" className="btn-ghost">See a real example</a>
             </div>
@@ -93,7 +93,7 @@ function HomePage() {
 
       {/* Trust bar */}
       <section className="border-y border-border bg-paper-alt py-6">
-        <div className="container-x flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+        <div className="container-x flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:gap-x-8 lg:gap-x-10">
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Workflows for
           </span>
@@ -111,7 +111,7 @@ function HomePage() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">New workflows</p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-4xl">
+              <h2 className="mt-3 font-display text-2xl font-semibold text-ink sm:text-3xl md:text-4xl">
                 Latest jeans workflow additions
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -127,7 +127,7 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
             {newWorkflows.map((item) => (
               <Link
                 key={item.slug}
@@ -135,7 +135,7 @@ function HomePage() {
                 params={{ id: item.slug }}
                 className="group overflow-hidden border border-border bg-paper transition hover:-translate-y-0.5 hover:shadow-sm"
               >
-                <div className="aspect-[4/5] overflow-hidden bg-paper-alt p-3">
+                <div className="aspect-[4/5] overflow-hidden bg-paper-alt p-2 sm:p-3">
                   <img
                     src={item.image}
                     alt={item.alt}
@@ -143,7 +143,7 @@ function HomePage() {
                     className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
-                <div className="border-t border-border p-5">
+                <div className="border-t border-border p-4 sm:p-5">
                   <h3 className="font-display text-lg font-medium text-ink">{item.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">Open workflow</p>
                 </div>
@@ -167,8 +167,8 @@ function HomePage() {
           </div>
           <div className="mt-10 overflow-hidden border border-border bg-paper">
             <div className="grid grid-cols-1 border-b border-border bg-paper-alt text-sm font-medium text-ink md:grid-cols-2">
-              <div className="px-6 py-4">What goes wrong</div>
-              <div className="border-t border-border px-6 py-4 md:border-l md:border-t-0">
+              <div className="px-4 py-4 sm:px-6">What goes wrong</div>
+              <div className="border-t border-border px-4 py-4 sm:px-6 md:border-l md:border-t-0">
                 What the workflow fixes
               </div>
             </div>
@@ -179,8 +179,8 @@ function HomePage() {
                   i < comparison.length - 1 ? "border-b border-border" : ""
                 }`}
               >
-                <div className="px-6 py-5 text-sm text-muted-foreground">{problem}</div>
-                <div className="border-t border-border px-6 py-5 text-sm text-ink md:border-l md:border-t-0">
+                <div className="px-4 py-4 text-sm leading-6 text-muted-foreground sm:px-6 sm:py-5">{problem}</div>
+                <div className="border-t border-border px-4 py-4 text-sm leading-6 text-ink sm:px-6 sm:py-5 md:border-l md:border-t-0">
                   <span className="mr-2 text-accent">✓</span>
                   {fix}
                 </div>
@@ -201,7 +201,7 @@ function HomePage() {
           </div>
           <ol className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((s) => (
-              <li key={s.n} className="border border-border p-6">
+              <li key={s.n} className="border border-border p-5 sm:p-6">
                 <div className="font-mono text-xs text-accent">{s.n}</div>
                 <h3 className="mt-3 font-display text-lg font-medium text-ink">{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
@@ -214,14 +214,14 @@ function HomePage() {
       {/* Categories */}
       <section className="section-y bg-paper-alt">
         <div className="container-x">
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end md:gap-6">
             <div className="max-w-2xl">
               <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">Workflow categories</h2>
               <p className="mt-4 text-muted-foreground">
                 Every workflow is written for a specific product type and a specific channel.
               </p>
             </div>
-            <Link to="/categories" className="hidden text-sm text-ink underline-offset-4 hover:underline md:inline">
+            <Link to="/categories" className="text-sm text-ink underline-offset-4 hover:underline">
               All categories →
             </Link>
           </div>
@@ -254,7 +254,7 @@ function HomePage() {
 
       {/* Final CTA */}
       <section className="section-y">
-        <div className="container-x flex flex-col items-start justify-between gap-6 border border-border p-10 md:flex-row md:items-center">
+        <div className="container-x flex flex-col items-stretch justify-between gap-6 border border-border p-6 sm:p-8 md:flex-row md:items-center md:p-10">
           <div>
             <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">
               Start with a workflow, ship a listing.
@@ -272,7 +272,7 @@ function HomePage() {
 
 function BeforeAfter() {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-4">
       <figure>
         <div className="aspect-square overflow-hidden border border-border bg-paper-alt">
           <img

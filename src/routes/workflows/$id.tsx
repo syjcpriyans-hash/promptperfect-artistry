@@ -74,7 +74,7 @@ export const Route = createFileRoute("/workflows/$id")({
         {
           title: loaderData
             ? getWorkflowSeoTitle(loaderData.workflow)
-            : "AI Product Image Prompt Workflow — ListingReady",
+            : "AI Product Image Prompt Workflow — ListingsReady",
         },
         {
           name: "description",
@@ -118,7 +118,7 @@ function CopyButton({
   };
 
   return (
-    <Button type="button" variant="outline" size="sm" onClick={handleCopy}>
+    <Button type="button" variant="outline" size="sm" className="w-full sm:w-auto" onClick={handleCopy}>
       {copied ? (
         <Check className="mr-2 h-4 w-4" />
       ) : (
@@ -137,8 +137,8 @@ function WorkflowDetailPage() {
 
   return (
     <SiteShell>
-      <article className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-8 text-sm text-muted-foreground">
+      <article className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="mb-7 break-words text-sm leading-6 text-muted-foreground sm:mb-8">
           <Link to="/categories" className="hover:text-foreground">
             Categories
           </Link>
@@ -176,15 +176,15 @@ function WorkflowDetailPage() {
         </div>
 
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight">{title}</h1>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
             Copy the complete prompt, upload your product photo, and use the fix
             prompts only when the AI changes the product.
           </p>
         </div>
 
-        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
-          <h2 className="text-2xl font-semibold">About this Workflow</h2>
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <h2 className="text-xl font-semibold sm:text-2xl">About this Workflow</h2>
           <ol className="mt-4 space-y-3 pl-6 text-sm leading-6 text-muted-foreground [list-style-type:decimal]">
             {about.map((item) => (
               <li key={item} className="pl-1">
@@ -196,13 +196,13 @@ function WorkflowDetailPage() {
 
         <WorkflowImageComparison workflow={workflow} />
 
-        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-2xl font-semibold">Complete Prompt</h2>
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <h2 className="text-xl font-semibold sm:text-2xl">Complete Prompt</h2>
             <CopyButton text={workflow.prompt} />
           </div>
 
-          <pre className="whitespace-pre-wrap rounded-xl bg-muted p-4 text-sm leading-6 text-foreground">
+          <pre className="whitespace-pre-wrap rounded-xl bg-muted p-3 text-[13px] leading-6 text-foreground sm:p-4 sm:text-sm">
             {workflow.prompt}
           </pre>
         </section>
@@ -221,8 +221,8 @@ function WorkflowDetailPage() {
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
-          <h2 className="text-2xl font-semibold">Settings in ChatGPT</h2>
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <h2 className="text-xl font-semibold sm:text-2xl">Settings in ChatGPT</h2>
           <dl className="mt-4 grid gap-3 sm:grid-cols-3">
             <div className="rounded-xl bg-muted px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -253,8 +253,8 @@ function WorkflowDetailPage() {
           </dl>
         </section>
 
-        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
-          <h2 className="text-2xl font-semibold">Workflow Testing</h2>
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <h2 className="text-xl font-semibold sm:text-2xl">Workflow Testing</h2>
           <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-xl bg-muted px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -294,8 +294,8 @@ function WorkflowDetailPage() {
           </dl>
         </section>
 
-        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
-          <h2 className="text-2xl font-semibold">Common Mistakes</h2>
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <h2 className="text-xl font-semibold sm:text-2xl">Common Mistakes</h2>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {workflow.commonMistakes.map((mistake) => (
               <li
@@ -308,12 +308,12 @@ function WorkflowDetailPage() {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-2xl border bg-card p-5 shadow-sm">
-          <h2 className="text-2xl font-semibold">Fix Prompts</h2>
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <h2 className="text-xl font-semibold sm:text-2xl">Fix Prompts</h2>
           <div className="mt-4 space-y-4">
             {workflow.fixPrompts.map((fixPrompt) => (
               <div key={fixPrompt.issue} className="rounded-xl border p-4">
-                <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="mb-3 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <h3 className="font-semibold">{fixPrompt.issue}</h3>
                   <CopyButton text={fixPrompt.fix} label="Copy fix" />
                 </div>
@@ -329,7 +329,7 @@ function WorkflowDetailPage() {
         {relatedWorkflows.length > 0 && (
           <section className="mt-10">
             <div className="mb-5">
-              <h2 className="text-2xl font-semibold">Related Workflows</h2>
+              <h2 className="text-xl font-semibold sm:text-2xl">Related Workflows</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Explore more image workflows for the same product type.
               </p>

@@ -34,7 +34,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               {study.eyebrow}
             </p>
 
-            <h1 className="mt-5 font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            <h1 className="mt-5 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl md:text-5xl">
               {study.title}
             </h1>
 
@@ -54,11 +54,11 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
 
         <section className="section-y">
           <div className="container-x max-w-4xl">
-            <div className="rounded-2xl border border-accent/30 bg-paper-alt p-6 shadow-sm md:p-8">
+            <div className="rounded-2xl border border-accent/30 bg-paper-alt p-5 shadow-sm sm:p-6 md:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
                 Direct answer
               </p>
-              <p className="mt-4 text-lg leading-8 text-ink">{study.answer}</p>
+              <p className="mt-4 text-base leading-7 text-ink sm:text-lg sm:leading-8">{study.answer}</p>
             </div>
           </div>
         </section>
@@ -69,7 +69,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 1. The objective
               </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-ink">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-ink sm:text-3xl">
                 {study.objectiveHeading}
               </h2>
               <p className="mt-5 leading-8 text-muted-foreground">
@@ -81,7 +81,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 2. The source-image problem
               </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-ink">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-ink sm:text-3xl">
                 {study.sourceProblemHeading}
               </h2>
               <p className="mt-5 leading-8 text-muted-foreground">
@@ -97,7 +97,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 3. Common AI failures
               </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-ink md:text-4xl">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-ink sm:text-3xl md:text-4xl">
                 {study.failureHeading}
               </h2>
               <p className="mt-4 leading-7 text-muted-foreground">
@@ -125,7 +125,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 4. The ListingsReady approach
               </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-ink md:text-4xl">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-ink sm:text-3xl md:text-4xl">
                 {study.approachHeading}
               </h2>
               <p className="mt-4 leading-7 text-muted-foreground">
@@ -137,7 +137,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               {study.approachItems.map((item) => (
                 <section
                   key={item.title}
-                  className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+                  className="rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6"
                 >
                   <h3 className="font-display text-xl font-semibold text-ink">
                     {item.title}
@@ -170,7 +170,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 6. Evaluation framework
               </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-ink md:text-4xl">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-ink sm:text-3xl md:text-4xl">
                 {study.evaluationHeading}
               </h2>
               <p className="mt-4 leading-7 text-muted-foreground">
@@ -179,7 +179,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
             </div>
 
             <div className="mt-9 overflow-hidden rounded-2xl border border-border">
-              <div className="grid grid-cols-[0.72fr_1.28fr] bg-paper-alt text-sm font-semibold text-ink">
+              <div className="hidden bg-paper-alt text-sm font-semibold text-ink sm:grid sm:grid-cols-[0.72fr_1.28fr]">
                 <div className="px-5 py-4">Evaluation area</div>
                 <div className="border-l border-border px-5 py-4">
                   What to verify
@@ -189,12 +189,12 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               {study.evaluationRows.map((row) => (
                 <div
                   key={row.area}
-                  className="grid grid-cols-[0.72fr_1.28fr] border-t border-border bg-paper text-sm"
+                  className="grid grid-cols-1 border-t border-border bg-paper text-sm sm:grid-cols-[0.72fr_1.28fr]"
                 >
                   <div className="px-5 py-4 font-medium text-ink">
                     {row.area}
                   </div>
-                  <div className="border-l border-border px-5 py-4 leading-6 text-muted-foreground">
+                  <div className="border-t border-border px-5 py-4 leading-6 text-muted-foreground sm:border-l sm:border-t-0">
                     {row.checkpoint}
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
 
         <section className="section-y bg-paper-alt">
           <div className="container-x grid max-w-5xl gap-8 lg:grid-cols-2">
-            <section className="rounded-2xl border border-border bg-paper p-7 shadow-sm">
+            <section className="rounded-2xl border border-border bg-paper p-5 shadow-sm sm:p-7">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 7. Corrections and limitations
               </p>
@@ -222,38 +222,38 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
               </ul>
             </section>
 
-            <section className="rounded-2xl border border-border bg-paper p-7 shadow-sm">
+            <section className="rounded-2xl border border-border bg-paper p-5 shadow-sm sm:p-7">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 8. Testing information
               </p>
               <dl className="mt-5 space-y-4 text-sm">
-                <div className="flex items-start justify-between gap-6 border-b border-border pb-3">
+                <div className="flex flex-col items-start gap-1 border-b border-border pb-3 sm:flex-row sm:justify-between sm:gap-6">
                   <dt className="text-muted-foreground">Tested</dt>
-                  <dd className="text-right font-semibold text-ink">
+                  <dd className="font-semibold text-ink sm:text-right">
                     July 2026
                   </dd>
                 </div>
-                <div className="flex items-start justify-between gap-6 border-b border-border pb-3">
+                <div className="flex flex-col items-start gap-1 border-b border-border pb-3 sm:flex-row sm:justify-between sm:gap-6">
                   <dt className="text-muted-foreground">AI</dt>
-                  <dd className="text-right font-semibold text-ink">
+                  <dd className="font-semibold text-ink sm:text-right">
                     ChatGPT image generation
                   </dd>
                 </div>
-                <div className="flex items-start justify-between gap-6 border-b border-border pb-3">
+                <div className="flex flex-col items-start gap-1 border-b border-border pb-3 sm:flex-row sm:justify-between sm:gap-6">
                   <dt className="text-muted-foreground">Model</dt>
-                  <dd className="text-right font-semibold text-ink">
+                  <dd className="font-semibold text-ink sm:text-right">
                     GPT-5.5
                   </dd>
                 </div>
-                <div className="flex items-start justify-between gap-6 border-b border-border pb-3">
+                <div className="flex flex-col items-start gap-1 border-b border-border pb-3 sm:flex-row sm:justify-between sm:gap-6">
                   <dt className="text-muted-foreground">Typical result</dt>
-                  <dd className="text-right font-semibold text-ink">
+                  <dd className="font-semibold text-ink sm:text-right">
                     1–2 generations
                   </dd>
                 </div>
-                <div className="flex items-start justify-between gap-6">
+                <div className="flex flex-col items-start gap-1 sm:flex-row sm:justify-between sm:gap-6">
                   <dt className="text-muted-foreground">Workflow version</dt>
-                  <dd className="text-right font-semibold text-ink">1.0</dd>
+                  <dd className="font-semibold text-ink sm:text-right">1.0</dd>
                 </div>
               </dl>
             </section>
@@ -262,7 +262,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
 
         <section className="section-y">
           <div className="container-x max-w-5xl">
-            <div className="rounded-2xl border border-border bg-card p-7 shadow-sm md:p-9">
+            <div className="rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-7 md:p-9">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 Questions this case study answers
               </p>
@@ -281,7 +281,7 @@ export function CaseStudyPage({ workflow, study }: CaseStudyPageProps) {
         </section>
 
         <section className="section-y pt-0">
-          <div className="container-x flex max-w-5xl flex-col items-start justify-between gap-7 border border-border p-8 md:flex-row md:items-center md:p-10">
+          <div className="container-x flex max-w-5xl flex-col items-stretch justify-between gap-7 border border-border p-6 sm:p-8 md:flex-row md:items-center md:p-10">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
                 Workflow used
