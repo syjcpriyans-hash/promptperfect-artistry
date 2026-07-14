@@ -6,6 +6,7 @@ import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { Button } from "@/components/ui/button";
 import { WorkflowImageComparison } from "@/components/workflow-image-comparison";
 import { getWorkflowAbout } from "@/lib/workflow-about";
+import { createBreadcrumbJsonLd } from "@/lib/breadcrumb-structured-data";
 import {
   findWorkflowByPublicParam,
   getWorkflowDisplayTitle,
@@ -37,19 +38,57 @@ export const Route = createFileRoute("/workflows/$id")({
 
     return { workflow, category, subcategory, relatedWorkflows };
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: loaderData
-          ? `${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
-          : "Workflow — ListingReady",
-      },
-      {
-        name: "description",
-        content: "Copy-paste-ready AI product image prompt workflow.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const breadcrumbItems = [
+      { name: "Home", path: "/" },
+      { name: "Categories", path: "/categories" },
+    ];
+
+    if (loaderData?.category) {
+      breadcrumbItems.push({
+        name: loaderData.category.title,
+        path: `/categories/${loaderData.category.slug}`,
+      });
+    }
+
+    if (loaderData?.category && loaderData.subcategory) {
+      breadcrumbItems.push({
+        name: loaderData.subcategory.title,
+        path: `/categories/${loaderData.category.slug}/${loaderData.subcategory.slug}`,
+      });
+    }
+
+    if (loaderData) {
+      breadcrumbItems.push({
+        name: getWorkflowDisplayTitle(loaderData.workflow),
+        path: `/workflows/${getWorkflowPublicSlug(loaderData.workflow)}`,
+      });
+    }
+
+    return {
+      meta: [
+        {
+          title: loaderData
+            ? `${getWorkflowDisplayTitle(loaderData.workflow)} — ListingReady`
+            : "Workflow — ListingReady",
+        },
+        {
+          name: "description",
+          content: "Copy-paste-ready AI product image prompt workflow.",
+        },
+      ],
+      scripts: loaderData
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify(
+                createBreadcrumbJsonLd(breadcrumbItems),
+              ),
+            },
+          ]
+        : [],
+    };
+  },
   component: WorkflowDetailPage,
 });
 

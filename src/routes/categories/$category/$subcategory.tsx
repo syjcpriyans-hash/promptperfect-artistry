@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
+import { createBreadcrumbJsonLd } from "@/lib/breadcrumb-structured-data";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { getWorkflowDisplayTitle, getWorkflowPublicSlug } from "@/lib/workflow-display";
 import { getVisibleWorkflows } from "@/lib/workflow-visibility";
@@ -25,6 +26,27 @@ export const Route = createFileRoute("/categories/$category/$subcategory")({
           : "Prompt workflows by product type.",
       },
     ],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(
+              createBreadcrumbJsonLd([
+                { name: "Home", path: "/" },
+                { name: "Categories", path: "/categories" },
+                {
+                  name: loaderData.category.title,
+                  path: `/categories/${loaderData.category.slug}`,
+                },
+                {
+                  name: loaderData.subcategory.title,
+                  path: `/categories/${loaderData.category.slug}/${loaderData.subcategory.slug}`,
+                },
+              ]),
+            ),
+          },
+        ]
+      : [],
   }),
   component: SubcategoryPage,
 });

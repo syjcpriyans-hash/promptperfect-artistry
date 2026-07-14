@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
+import { createBreadcrumbJsonLd } from "@/lib/breadcrumb-structured-data";
 import { getVisibleWorkflows } from "@/lib/workflow-visibility";
 import { getCategory, getSubcategoriesForCategory, getWorkflowsForSubcategory } from "@/data/all-workflows";
 
@@ -14,6 +15,23 @@ export const Route = createFileRoute("/categories/$category/")({
       { title: `${loaderData?.category.title ?? "Category"} — ListingReady` },
       { name: "description", content: loaderData?.category.description ?? "" },
     ],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(
+              createBreadcrumbJsonLd([
+                { name: "Home", path: "/" },
+                { name: "Categories", path: "/categories" },
+                {
+                  name: loaderData.category.title,
+                  path: `/categories/${loaderData.category.slug}`,
+                },
+              ]),
+            ),
+          },
+        ]
+      : [],
   }),
   component: CategoryPage,
 });
