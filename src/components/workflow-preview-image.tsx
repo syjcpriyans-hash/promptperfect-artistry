@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Workflow } from "@/data/workflows";
 import { getWorkflowDisplayTitle, getWorkflowPreviewPath } from "@/lib/workflow-display";
+import { getWorkflowResultAlt } from "@/lib/workflow-image-alt";
 import { cn } from "@/lib/utils";
 
 type WorkflowPreviewImageProps = {
@@ -19,6 +20,7 @@ export function WorkflowPreviewImage({
   const [zoom, setZoom] = useState(1);
   const title = getWorkflowDisplayTitle(workflow);
   const imagePath = getWorkflowPreviewPath(workflow);
+  const imageAlt = getWorkflowResultAlt(workflow);
 
   const openPreview = () => {
     if (!enableZoom) return;
@@ -45,7 +47,7 @@ export function WorkflowPreviewImage({
   const image = (
     <img
       src={imagePath}
-      alt={`${title} preview`}
+      alt={imageAlt}
       className="h-full w-full object-contain"
       loading="lazy"
       onError={() => setFailed(true)}
@@ -61,7 +63,7 @@ export function WorkflowPreviewImage({
             "block aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-t-2xl bg-muted/20 p-2 text-left",
             className,
           )}
-          aria-label={`Open ${title} preview image`}
+          aria-label={`Open ${title} result image`}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
@@ -133,7 +135,7 @@ export function WorkflowPreviewImage({
             >
               <img
                 src={imagePath}
-                alt={`${title} enlarged preview`}
+                alt={imageAlt}
                 className="h-full w-full object-contain"
               />
             </div>

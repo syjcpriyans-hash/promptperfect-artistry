@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import type { Workflow } from "@/data/workflows";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
-import { getWorkflowDisplayTitle } from "@/lib/workflow-display";
+import { getWorkflowOriginalAlt } from "@/lib/workflow-image-alt";
 
 type WorkflowImageComparisonProps = {
   workflow: Workflow;
@@ -16,7 +16,7 @@ export function WorkflowImageComparison({
 
   const [originalPath, setOriginalPath] = useState(workflowOriginalPath);
   const [originalFailed, setOriginalFailed] = useState(false);
-  const title = getWorkflowDisplayTitle(workflow);
+  const originalAlt = getWorkflowOriginalAlt(workflow);
 
   useEffect(() => {
     setOriginalPath(workflowOriginalPath);
@@ -58,7 +58,7 @@ export function WorkflowImageComparison({
             ) : (
               <img
                 src={originalPath}
-                alt={`Original product reference for ${title}`}
+                alt={originalAlt}
                 className="h-full w-full object-contain"
                 loading="lazy"
                 onError={handleOriginalError}
