@@ -8,7 +8,7 @@ export const Route = createFileRoute("/privacy")({
       {
         name: "description",
         content:
-          "How ListingsReady handles personal information, analytics preferences and website usage data.",
+          "How ListingsReady handles personal information and website usage data.",
       },
       { property: "og:title", content: "Privacy Policy — ListingsReady" },
       {
@@ -45,13 +45,12 @@ function PrivacyPage() {
 
             <section>
               <h2 className="font-display text-xl font-semibold text-ink">
-                Optional website analytics
+                Website analytics
               </h2>
               <p className="mt-3 leading-7">
-                When you accept analytics, ListingsReady uses Google Analytics to
-                understand page views, traffic sources and interactions such as
-                workflow views, prompt-copy actions and contact-link clicks.
-                Analytics is not loaded when you decline.
+                ListingsReady uses Google Analytics to understand page views,
+                traffic sources and interactions such as workflow views,
+                prompt-copy actions and contact-link clicks.
               </p>
               <p className="mt-3 leading-7">
                 We do not intentionally send product photos, prompt text, names,
@@ -89,9 +88,7 @@ function PrivacyPage() {
               </p>
             </section>
 
-            <p className="text-xs">
-              Last updated: July 2026.
-            </p>
+            <p className="text-xs">Last updated: July 2026.</p>
           </div>
         </div>
       </section>

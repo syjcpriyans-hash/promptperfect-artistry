@@ -10,7 +10,6 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import appCss from "../styles.css?url";
-import { AnalyticsConsentBanner } from "@/components/analytics-consent-banner";
 import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
 
 const SITE_URL = "https://listingsready.com";
@@ -161,6 +160,23 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:url" content={canonicalUrl} />
+
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-FQYCQ4ELH1"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FQYCQ4ELH1');
+            `,
+          }}
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -183,7 +199,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AnalyticsRouteTracker />
       <Outlet />
-      <AnalyticsConsentBanner />
     </QueryClientProvider>
   );
 }

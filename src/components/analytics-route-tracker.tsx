@@ -1,31 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import {
-  ANALYTICS_CONSENT_EVENT,
-  getAnalyticsConsent,
-  trackPageView,
-} from "@/lib/analytics";
+import { trackPageView } from "@/lib/analytics";
 
 export function AnalyticsRouteTracker() {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    if (getAnalyticsConsent() === "granted") {
-      trackPageView();
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
 
-    const handleConsentChange = () => {
-      if (getAnalyticsConsent() === "granted") {
-        trackPageView();
-      }
-    };
-
-    window.addEventListener(ANALYTICS_CONSENT_EVENT, handleConsentChange);
-    return () => {
-      window.removeEventListener(ANALYTICS_CONSENT_EVENT, handleConsentChange);
-    };
+    trackPageView();
   }, [pathname]);
 
   return null;
