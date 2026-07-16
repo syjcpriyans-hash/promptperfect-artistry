@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/site-shell";
 import { WorkflowPreviewImage } from "@/components/workflow-preview-image";
 import { Button } from "@/components/ui/button";
 import { WorkflowImageComparison } from "@/components/workflow-image-comparison";
+import { WorkflowEngagementPanel } from "@/components/workflow-engagement-panel";
 import { getWorkflowAbout } from "@/lib/workflow-about";
 import { createBreadcrumbJsonLd } from "@/lib/breadcrumb-structured-data";
 import {
@@ -217,25 +218,34 @@ function WorkflowDetailPage() {
 
         <WorkflowImageComparison workflow={workflow} />
 
-        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
-          <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <h2 className="text-xl font-semibold sm:text-2xl">Complete Prompt</h2>
-            <CopyButton
-              text={workflow.prompt}
-              eventName="copy_prompt"
-              eventParams={{
-                workflow_slug: workflowSlug,
-                workflow_title: title,
-                category: workflow.categorySlug,
-                subcategory: workflow.subcategorySlug,
-              }}
-            />
-          </div>
+        <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+          <section className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+            <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <h2 className="text-xl font-semibold sm:text-2xl">Complete Prompt</h2>
+              <CopyButton
+                text={workflow.prompt}
+                eventName="copy_prompt"
+                eventParams={{
+                  workflow_slug: workflowSlug,
+                  workflow_title: title,
+                  category: workflow.categorySlug,
+                  subcategory: workflow.subcategorySlug,
+                }}
+              />
+            </div>
 
-          <pre className="whitespace-pre-wrap rounded-xl bg-muted p-3 text-[13px] leading-6 text-foreground sm:p-4 sm:text-sm">
-            {workflow.prompt}
-          </pre>
-        </section>
+            <pre className="whitespace-pre-wrap rounded-xl bg-muted p-3 text-[13px] leading-6 text-foreground sm:p-4 sm:text-sm">
+              {workflow.prompt}
+            </pre>
+          </section>
+
+          <WorkflowEngagementPanel
+            workflowSlug={workflowSlug}
+            workflowTitle={title}
+            category={workflow.categorySlug}
+            subcategory={workflow.subcategorySlug}
+          />
+        </div>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2">
           <div className="rounded-2xl border bg-card p-5 shadow-sm">
