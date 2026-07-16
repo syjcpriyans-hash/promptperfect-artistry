@@ -27,6 +27,31 @@ export function SiteFooter() {
                 hello@listingready.app
               </a>
             </p>
+
+            <div className="mt-6">
+              <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                Featured on Product Hunt
+              </p>
+              <a
+                href="https://www.producthunt.com/products/listingsready?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-listingsready"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("product_hunt_badge_click", {
+                    link_location: "footer",
+                  })
+                }
+                className="inline-flex"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1197643&theme=light&t=1784218126201"
+                  alt="ListingsReady - Create listingsready product images with tested AI workflows | Product Hunt"
+                  width={250}
+                  height={54}
+                  loading="lazy"
+                />
+              </a>
+            </div>
           </div>
 
           <div>
