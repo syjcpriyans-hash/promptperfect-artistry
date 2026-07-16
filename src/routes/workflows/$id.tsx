@@ -159,7 +159,7 @@ function WorkflowDetailPage() {
 
   return (
     <SiteShell>
-      <article className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <article className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="mb-7 break-words text-sm leading-6 text-muted-foreground sm:mb-8">
           <Link to="/categories" className="hover:text-foreground">
             Categories
@@ -205,7 +205,9 @@ function WorkflowDetailPage() {
           </p>
         </div>
 
-        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+        <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start lg:gap-8">
+          <div className="min-w-0">
+        <section className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
           <h2 className="text-xl font-semibold sm:text-2xl">About this Workflow</h2>
           <ol className="mt-4 space-y-3 pl-6 text-sm leading-6 text-muted-foreground [list-style-type:decimal]">
             {about.map((item) => (
@@ -218,8 +220,7 @@ function WorkflowDetailPage() {
 
         <WorkflowImageComparison workflow={workflow} />
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
-          <section className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+        <section className="mt-8 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
             <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <h2 className="text-xl font-semibold sm:text-2xl">Complete Prompt</h2>
               <CopyButton
@@ -238,14 +239,6 @@ function WorkflowDetailPage() {
               {workflow.prompt}
             </pre>
           </section>
-
-          <WorkflowEngagementPanel
-            workflowSlug={workflowSlug}
-            workflowTitle={title}
-            category={workflow.categorySlug}
-            subcategory={workflow.subcategorySlug}
-          />
-        </div>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2">
           <div className="rounded-2xl border bg-card p-5 shadow-sm">
@@ -419,6 +412,15 @@ function WorkflowDetailPage() {
             </Link>
           </div>
         )}
+          </div>
+
+          <WorkflowEngagementPanel
+            workflowSlug={workflowSlug}
+            workflowTitle={title}
+            category={workflow.categorySlug}
+            subcategory={workflow.subcategorySlug}
+          />
+        </div>
       </article>
     </SiteShell>
   );
