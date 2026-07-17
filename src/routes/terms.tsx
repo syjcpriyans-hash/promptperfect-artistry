@@ -4,10 +4,10 @@ import { SiteShell } from "@/components/site-shell";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — ListingReady" },
-      { name: "description", content: "The terms that apply when you use ListingReady." },
-      { property: "og:title", content: "Terms of Service — ListingReady" },
-      { property: "og:description", content: "The terms that apply when you use ListingReady." },
+      { title: "Terms of Service — ListingsReady" },
+      { name: "description", content: "The terms that apply when you use ListingsReady." },
+      { property: "og:title", content: "Terms of Service — ListingsReady" },
+      { property: "og:description", content: "The terms that apply when you use ListingsReady." },
       { property: "og:url", content: "/terms" },
     ],
     links: [{ rel: "canonical", href: "/terms" }],
@@ -23,7 +23,7 @@ function TermsPage() {
           <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">Terms of Service</h1>
           <div className="prose mt-8 space-y-6 text-muted-foreground">
             <p>
-              ListingReady provides a library of prompt workflows for use with third-party AI tools. You are
+              ListingsReady provides a library of prompt workflows for use with third-party AI tools. You are
               responsible for reviewing every image you generate for accuracy, rights, and compliance with the
               policies of the marketplace where you publish it.
             </p>
@@ -33,14 +33,14 @@ function TermsPage() {
               product.
             </p>
             <p>
-              ListingReady is provided "as is." Generative AI outputs are inherently variable, and we make no
+              ListingsReady is provided "as is." Generative AI outputs are inherently variable, and we make no
               warranty that any specific generation will meet a specific marketplace's policy at a given point
               in time.
             </p>
             <p>
               Questions:{" "}
-              <a href="mailto:hello@listingready.app" className="text-ink underline-offset-4 hover:underline">
-                hello@listingready.app
+              <a href="mailto:hello@listingsready.com" className="text-ink underline-offset-4 hover:underline">
+                hello@listingsready.com
               </a>
               .
             </p>

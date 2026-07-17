@@ -79,10 +79,10 @@ function PrivacyPage() {
                 To request access to, correction of or deletion of information
                 associated with you, email{" "}
                 <a
-                  href="mailto:hello@listingready.app"
+                  href="mailto:hello@listingsready.com"
                   className="text-ink underline-offset-4 hover:underline"
                 >
-                  hello@listingready.app
+                  hello@listingsready.com
                 </a>
                 .
               </p>

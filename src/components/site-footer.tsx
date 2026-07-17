@@ -15,7 +15,7 @@ export function SiteFooter() {
             <p className="mt-4 text-sm text-muted-foreground">
               Contact:{" "}
               <a
-                href="mailto:hello@listingready.app"
+                href="mailto:hello@listingsready.com"
                 onClick={() =>
                   trackEvent("contact_click", {
                     contact_method: "email",
@@ -24,7 +24,7 @@ export function SiteFooter() {
                 }
                 className="break-all text-ink underline-offset-4 hover:underline"
               >
-                hello@listingready.app
+                hello@listingsready.com
               </a>
             </p>
 
