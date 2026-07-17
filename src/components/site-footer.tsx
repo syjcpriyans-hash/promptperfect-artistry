@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Instagram } from "lucide-react";
 import { Wordmark } from "./site-header";
 import { trackEvent } from "@/lib/analytics";
 
@@ -27,6 +28,23 @@ export function SiteFooter() {
                 hello@listingsready.com
               </a>
             </p>
+
+            <a
+              href="https://www.instagram.com/listingsready/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("social_click", {
+                  social_platform: "instagram",
+                  link_location: "footer",
+                })
+              }
+              className="mt-4 inline-flex min-h-10 items-center gap-2 text-sm font-medium text-ink underline-offset-4 hover:underline"
+              aria-label="Visit ListingsReady on Instagram"
+            >
+              <Instagram className="h-4 w-4" aria-hidden="true" />
+              @listingsready
+            </a>
 
             <div className="mt-6">
               <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
