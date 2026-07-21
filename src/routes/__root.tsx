@@ -11,6 +11,7 @@ import {
 import type { ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
+import { SpecialOfferPopup } from "@/components/special-offer-popup";
 
 const SITE_URL = "https://listingsready.com";
 
@@ -199,6 +200,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AnalyticsRouteTracker />
       <Outlet />
+      <SpecialOfferPopup />
     </QueryClientProvider>
   );
 }
