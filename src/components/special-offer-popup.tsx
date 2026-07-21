@@ -136,8 +136,9 @@ export function SpecialOfferPopup() {
             For a limited time, ListingsReady is offering professional product
             image creation for selected businesses at no cost. We will create
             high-quality, e-commerce-ready visuals for your brand. In return,
-            we only ask for your honest feedback and a genuine review of your
-            experience with ListingsReady.
+            we only ask for your honest{" "}
+            <span className="font-semibold text-[#AF8F3B]">feedback</span>{" "}
+            and a genuine review of your experience with ListingsReady.
           </p>
 
           <a
